@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nexora — Multipurpose HTML5 Template</title>
+  <meta name="description" content="Nexora is a modern multipurpose HTML5 template with 12 unique homepages, 80+ inner pages and 250+ UI blocks. Built with Bootstrap 5, SCSS and vanilla JavaScript.">
+  <meta name="theme-color" content="#0a0c1d">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nexora — Multipurpose HTML5 Template">
+  <meta property="og:description" content="12 unique homepages, 80+ inner pages, 250+ UI blocks, dark mode and more.">
+  <meta property="og:image" content="assets/img/demos/03-saas.svg">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Icon sprite ========================================================= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/></symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+
+      <symbol id="f-responsive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="11" rx="2"/><rect x="17" y="8" width="5" height="12" rx="1.5"/><path d="M6 19h6"/></symbol>
+      <symbol id="f-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></symbol>
+      <symbol id="f-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+      <symbol id="f-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+      <symbol id="f-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+      <symbol id="f-type" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></symbol>
+      <symbol id="f-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol>
+      <symbol id="f-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></symbol>
+      <symbol id="f-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+      <symbol id="f-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8"/><path d="M21 3v5h-5"/></symbol>
+      <symbol id="f-support" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.9 4.9 4.3 4.3M14.8 14.8l4.3 4.3M14.8 9.2l4.3-4.3M4.9 19.1l4.3-4.3"/></symbol>
+      <symbol id="f-a11y" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.5"/><path d="M5 8l7 1.5L19 8M12 9.5V14m0 0-3 7m3-7 3 7"/></symbol>
+      <symbol id="f-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"/></symbol>
+      <symbol id="f-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1"/><circle cx="17.5" cy="10.5" r="1"/><circle cx="8.5" cy="7.5" r="1"/><circle cx="6.5" cy="12.5" r="1"/><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.3A5.7 5.7 0 0 0 22 9.8C22 5.5 17.5 2 12 2z"/></symbol>
+      <symbol id="f-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></symbol>
+
+      <symbol id="s-x" viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.2-8.3L2 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></symbol>
+      <symbol id="s-dribbble" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8.6 2.6C13 8 15.2 13.8 16 21.1M2.1 10.7c5.3.3 11.5-.9 16.9-4.9M5.3 19.4c3.3-4.6 8.7-6.6 16.5-5.2"/></symbol>
+      <symbol id="s-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.7 9.7 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></symbol>
+      <symbol id="s-youtube" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15.1V8.9l5.8 3.1-5.8 3.1z"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Header ============================================================== -->
+  <header class="header">
+    <div class="container">
+      <a class="logo" href="#top" aria-label="Nexora home">
+        <svg viewBox="0 0 40 40" aria-hidden="true">
+          <defs><linearGradient id="lg-logo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b7bff"/><stop offset="1" stop-color="#22c3ee"/></linearGradient></defs>
+          <rect width="40" height="40" rx="11" fill="url(#lg-logo)"/>
+          <path d="M12 28V12l16 16V12" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Nexora <small>v2.4</small>
+      </a>
+
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#demos">Demos</a></li>
+          <li><a href="#pages">Inner Pages</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#changelog">Changelog</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li class="nav__buy"><a class="btn" href="https://themeforest.net/" target="_blank" rel="noopener">Buy Nexora — $19</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__cta">
+        <a class="btn btn--sm" href="https://themeforest.net/" target="_blank" rel="noopener">
+          <svg aria-hidden="true"><use href="#i-cart"/></svg> Buy Now
+        </a>
+        <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero ============================================================== -->
+    <section class="hero" id="top">
+      <span class="hero__glow hero__glow--1"></span>
+      <span class="hero__glow hero__glow--2"></span>
+      <span class="hero__glow hero__glow--3"></span>
+
+      <div class="container">
+        <div class="hero__content">
+          <a class="hero__badge" href="#changelog"><b>NEW</b> Version 2.4 — 4 new demos &amp; dark mode</a>
+          <h1>Build stunning websites <span class="text-grad">faster than ever</span></h1>
+          <p class="hero__lead">
+            <strong>Nexora</strong> is a modern multipurpose HTML5 template with <strong>12 unique homepages</strong>,
+            80+ inner pages and 250+ UI blocks — crafted with Bootstrap&nbsp;5, SCSS and clean vanilla JavaScript.
+          </p>
+          <div class="hero__actions">
+            <a class="btn" href="#demos">Explore Demos <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn--ghost" href="https://themeforest.net/" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-cart"/></svg> Buy Now <span class="price">$19</span>
+            </a>
+          </div>
+          <div class="hero__trust">
+            <span>
+              <span class="stars" aria-hidden="true">
+                <svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg>
+              </span>
+              <span><strong>4.9/5</strong> average rating</span>
+            </span>
+            <i class="dot-sep" aria-hidden="true"></i>
+            <span><strong>2,400+</strong> happy customers</span>
+            <i class="dot-sep" aria-hidden="true"></i>
+            <span>Free lifetime updates</span>
+          </div>
+        </div>
+
+        <div class="hero__stats" data-reveal>
+          <div><strong data-count="12" data-suffix="+">12+</strong><span>Unique Homepages</span></div>
+          <div><strong data-count="80" data-suffix="+">80+</strong><span>Inner Pages</span></div>
+          <div><strong data-count="250" data-suffix="+">250+</strong><span>UI Blocks</span></div>
+          <div><strong data-count="98" data-suffix="%">98%</strong><span>Lighthouse Score</span></div>
+        </div>
+
+        <div class="hero__showcase" aria-hidden="true">
+          <div class="browser browser--left">
+            <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url"></span></div>
+            <div class="shot"><img src="assets/img/demos/02-agency.svg" alt="" width="800" height="3040"></div>
+          </div>
+          <div class="browser">
+            <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url"></span></div>
+            <div class="shot"><img src="assets/img/demos/03-saas.svg" alt="" width="800" height="3588" fetchpriority="high"></div>
+          </div>
+          <div class="browser browser--right">
+            <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url"></span></div>
+            <div class="shot"><img src="assets/img/demos/12-medical.svg" alt="" width="800" height="3288"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech stack ======================================================== -->
+    <section class="tech" aria-label="Built with">
+      <div class="container">
+        <p class="tech__label">Built with modern, developer-friendly tools</p>
+        <ul class="tech__list">
+          <li><i style="--c:#e34f26">5</i>HTML5</li>
+          <li><i style="--c:#7952b3">B</i>Bootstrap 5</li>
+          <li><i style="--c:#cd6799">S</i>SCSS</li>
+          <li><i style="--c:#d4b106">JS</i>Vanilla ES6</li>
+          <li><i style="--c:#cf4647">G</i>Gulp Workflow</li>
+          <li><i style="--c:#12b981">W</i>W3C Valid</li>
+          <li><i style="--c:#5b5bf7">A</i>WCAG 2.1 AA</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Demos ============================================================= -->
+    <section class="section section--soft" id="demos">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Pre-built Demos</span>
+          <h2>12 stunning homepages, one powerful template</h2>
+          <p>Pick a demo, swap the content and launch. Every homepage is fully responsive, dark-mode ready and built from the same reusable blocks.</p>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter demos by category" data-reveal>
+          <button class="filter-btn is-active" type="button" data-filter="all" aria-pressed="true">All <small>12</small></button>
+          <button class="filter-btn" type="button" data-filter="business" aria-pressed="false">Business <small>0</small></button>
+          <button class="filter-btn" type="button" data-filter="agency" aria-pressed="false">Agency <small>0</small></button>
+          <button class="filter-btn" type="button" data-filter="saas" aria-pressed="false">SaaS &amp; Tech <small>0</small></button>
+          <button class="filter-btn" type="button" data-filter="landing" aria-pressed="false">Landing <small>0</small></button>
+          <button class="filter-btn" type="button" data-filter="portfolio" aria-pressed="false">Portfolio <small>0</small></button>
+          <button class="filter-btn" type="button" data-filter="shop" aria-pressed="false">Shop <small>0</small></button>
+        </div>
+
+        <div class="demo-grid">
+          <article class="demo-card" data-category="business" data-reveal>
+            <a class="demo-card__link" href="demo/index-corporate.html" target="_blank" rel="noopener" aria-label="Live preview: Corporate Business">
+              <div class="shot"><img src="assets/img/demos/01-corporate.svg" alt="Corporate Business demo homepage" width="800" height="3008" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/index-corporate.html" target="_blank" rel="noopener">Corporate Business</a></h3><span>Business</span></div>
+          </article>
+          <article class="demo-card" data-category="agency" data-reveal style="--delay:0.08s">
+            <a class="demo-card__link" href="demo/index-agency.html" target="_blank" rel="noopener" aria-label="Live preview: Creative Agency">
+              <span class="badge badge--hot">Popular</span><span class="badge badge--dark">Dark</span>
+              <div class="shot"><img src="assets/img/demos/02-agency.svg" alt="Creative Agency demo homepage" width="800" height="3040" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/index-agency.html" target="_blank" rel="noopener">Creative Agency</a></h3><span>Agency</span></div>
+          </article>
+          <article class="demo-card" data-category="saas landing" data-reveal style="--delay:0.16s">
+            <a class="demo-card__link" href="demo/index-saas.html" target="_blank" rel="noopener" aria-label="Live preview: SaaS Product">
+              <span class="badge badge--hot">Popular</span>
+              <div class="shot"><img src="assets/img/demos/03-saas.svg" alt="SaaS Product demo homepage" width="800" height="3588" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/index-saas.html" target="_blank" rel="noopener">SaaS Product</a></h3><span>SaaS</span></div>
+          </article>
+          <article class="demo-card" data-category="agency business" data-reveal>
+            <a class="demo-card__link" href="demo/index-marketing.html" target="_blank" rel="noopener" aria-label="Live preview: Digital Marketing">
+              <div class="shot"><img src="assets/img/demos/04-marketing.svg" alt="Digital Marketing demo homepage" width="800" height="3048" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/index-marketing.html" target="_blank" rel="noopener">Digital Marketing</a></h3><span>Marketing</span></div>
+          </article>
+          <article class="demo-card" data-category="portfolio" data-reveal style="--delay:0.08s">
+            <a class="demo-card__link" href="demo/index-portfolio.html" target="_blank" rel="noopener" aria-label="Live preview: Personal Portfolio">
+              <span class="badge badge--dark">Dark</span>
+              <div class="shot"><img src="assets/img/demos/05-portfolio.svg" alt="Personal Portfolio demo homepage" width="800" height="2538" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/index-portfolio.html" target="_blank" rel="noopener">Personal Portfolio</a></h3><span>Portfolio</span></div>
+          </article>
+          <article class="demo-card" data-category="landing saas" data-reveal style="--delay:0.16s">
+            <a class="demo-card__link" href="demo/index-app.html" target="_blank" rel="noopener" aria-label="Live preview: Mobile App">
+              <div class="shot"><img src="assets/img/demos/06-app.svg" alt="Mobile App demo homepage" width="800" height="3268" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/index-app.html" target="_blank" rel="noopener">Mobile App</a></h3><span>App Landing</span></div>
+          </article>
+          <article class="demo-card" data-category="business" data-reveal>
+            <a class="demo-card__link" href="demo/index-consulting.html" target="_blank" rel="noopener" aria-label="Live preview: Consulting Firm">
+              <div class="shot"><img src="assets/img/demos/07-consulting.svg" alt="Consulting Firm demo homepage" width="800" height="2840" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/index-consulting.html" target="_blank" rel="noopener">Consulting Firm</a></h3><span>Business</span></div>
+          </article>
+          <article class="demo-card" data-category="saas" data-reveal style="--delay:0.08s">
+            <a class="demo-card__link" href="demo/index-fintech.html" target="_blank" rel="noopener" aria-label="Live preview: Fintech Startup">
+              <span class="badge">New</span><span class="badge badge--dark">Dark</span>
+              <div class="shot"><img src="assets/img/demos/08-fintech.svg" alt="Fintech Startup demo homepage" width="800" height="2918" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/index-fintech.html" target="_blank" rel="noopener">Fintech Startup</a></h3><span>Fintech</span></div>
+          </article>
+          <article class="demo-card" data-category="landing" data-reveal style="--delay:0.16s">
+            <a class="demo-card__link" href="demo/index-startup.html" target="_blank" rel="noopener" aria-label="Live preview: Startup Launch">
+              <div class="shot"><img src="assets/img/demos/09-startup.svg" alt="Startup Launch demo homepage" width="800" height="3348" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/index-startup.html" target="_blank" rel="noopener">Startup Launch</a></h3><span>Startup</span></div>
+          </article>
+          <article class="demo-card" data-category="shop" data-reveal>
+            <a class="demo-card__link" href="demo/index-shop.html" target="_blank" rel="noopener" aria-label="Live preview: Fashion Store">
+              <span class="badge">New</span>
+              <div class="shot"><img src="assets/img/demos/10-shop.svg" alt="Fashion Store demo homepage" width="800" height="2682" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/index-shop.html" target="_blank" rel="noopener">Fashion Store</a></h3><span>eCommerce</span></div>
+          </article>
+          <article class="demo-card" data-category="portfolio agency" data-reveal style="--delay:0.08s">
+            <a class="demo-card__link" href="demo/index-architecture.html" target="_blank" rel="noopener" aria-label="Live preview: Architecture Studio">
+              <span class="badge">New</span><span class="badge badge--dark">Dark</span>
+              <div class="shot"><img src="assets/img/demos/11-architecture.svg" alt="Architecture Studio demo homepage" width="800" height="3060" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/index-architecture.html" target="_blank" rel="noopener">Architecture Studio</a></h3><span>Architecture</span></div>
+          </article>
+          <article class="demo-card" data-category="business" data-reveal style="--delay:0.16s">
+            <a class="demo-card__link" href="demo/index-medical.html" target="_blank" rel="noopener" aria-label="Live preview: Medical Clinic">
+              <span class="badge">New</span>
+              <div class="shot"><img src="assets/img/demos/12-medical.svg" alt="Medical Clinic demo homepage" width="800" height="3288" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/index-medical.html" target="_blank" rel="noopener">Medical Clinic</a></h3><span>Healthcare</span></div>
+          </article>
+          <article class="demo-card demo-card--soon" data-reveal>
+            <a class="demo-card__link" href="#faq">
+              <div>
+                <span class="plus"><svg aria-hidden="true"><use href="#i-plus"/></svg></span>
+                <h3>More demos coming soon</h3>
+                <p>New homepages ship with every update — always free for existing customers.</p>
+                <span class="link">Request a demo →</span>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spotlight ========================================================= -->
+    <section class="section" id="highlights">
+      <div class="container">
+        <div class="spot">
+          <div class="spot__media" data-reveal>
+            <div class="modes" aria-hidden="true">
+              <div class="browser browser--back">
+                <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url"></span></div>
+                <div class="shot"><img src="assets/img/demos/09-startup.svg" alt="" width="800" height="3348" loading="lazy"></div>
+              </div>
+              <div class="browser browser--front">
+                <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url"></span></div>
+                <div class="shot"><img src="assets/img/demos/08-fintech.svg" alt="" width="800" height="2918" loading="lazy"></div>
+              </div>
+              <div class="mode-switch">
+                <span><svg><use href="#i-sun"/></svg></span>
+                <span class="on"><svg><use href="#i-moon"/></svg></span>
+              </div>
+            </div>
+          </div>
+          <div class="spot__body" data-reveal style="--delay:.1s">
+            <span class="eyebrow">Dark Mode</span>
+            <h2>Light &amp; dark mode, built right in</h2>
+            <p>Every page ships with a polished dark theme. Visitors can toggle it, or it follows their system preference automatically — no extra work for you.</p>
+            <ul class="check-list">
+              <li>One-click toggle with remembered preference</li>
+              <li>Respects <code>prefers-color-scheme</code></li>
+              <li>Powered by CSS variables — restyle in minutes</li>
+            </ul>
+            <a class="btn btn--outline" href="#demos">See it in action <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+
+        <div class="spot spot--flip">
+          <div class="spot__media" data-reveal>
+            <div class="devices" aria-hidden="true">
+              <div class="device-laptop">
+                <div class="device-laptop__screen"><div class="shot"><img src="assets/img/demos/06-app.svg" alt="" width="800" height="3268" loading="lazy"></div></div>
+                <div class="device-laptop__base"></div>
+              </div>
+              <div class="device-tablet"><div class="shot"><img src="assets/img/demos/06-app.svg" alt="" width="800" height="3268" loading="lazy"></div></div>
+              <div class="device-phone"><div class="shot"><img src="assets/img/demos/06-app.svg" alt="" width="800" height="3268" loading="lazy"></div></div>
+            </div>
+          </div>
+          <div class="spot__body" data-reveal style="--delay:.1s">
+            <span class="eyebrow">Fully Responsive</span>
+            <h2>Pixel-perfect on every screen size</h2>
+            <p>Designed mobile-first and tested on real devices. Layouts, typography and navigation adapt gracefully from 320px phones to ultra-wide displays.</p>
+            <ul class="check-list">
+              <li>Mobile-first, fluid typography</li>
+              <li>Touch-friendly menus and sliders</li>
+              <li>Retina-ready SVG icons and assets</li>
+            </ul>
+            <a class="btn btn--outline" href="#features">All features <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+
+        <div class="spot">
+          <div class="spot__media" data-reveal>
+            <div class="blocks" aria-hidden="true">
+              <div class="block-tile"><span class="ph"></span><b>Hero</b><small>24 variants</small></div>
+              <div class="block-tile"><span class="ph"></span><b>Features</b><small>32 variants</small></div>
+              <div class="block-tile"><span class="ph"></span><b>Pricing</b><small>14 variants</small></div>
+              <div class="block-tile"><span class="ph"></span><b>Testimonials</b><small>18 variants</small></div>
+              <div class="block-tile"><span class="ph"></span><b>Team</b><small>12 variants</small></div>
+              <div class="block-tile"><span class="ph"></span><b>Call to Action</b><small>20 variants</small></div>
+              <div class="block-tile"><span class="ph"></span><b>Blog</b><small>16 variants</small></div>
+              <div class="block-tile"><span class="ph"></span><b>Contact</b><small>10 variants</small></div>
+              <div class="block-tile"><span class="ph"></span><b>Footer</b><small>12 variants</small></div>
+            </div>
+          </div>
+          <div class="spot__body" data-reveal style="--delay:.1s">
+            <span class="eyebrow">UI Blocks</span>
+            <h2>250+ blocks. Mix, match &amp; ship.</h2>
+            <p>Build new pages in minutes by combining ready-made sections. Every block is self-contained, consistently styled and documented.</p>
+            <ul class="check-list">
+              <li>Copy-paste friendly, semantic markup</li>
+              <li>Consistent spacing and design tokens</li>
+              <li>Well-commented SCSS partial for each block</li>
+            </ul>
+            <a class="btn btn--outline" href="#pages">Browse pages <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inner pages ======================================================= -->
+    <section class="section section--soft" id="pages">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Inner Pages</span>
+          <h2>80+ carefully crafted inner pages</h2>
+          <p>Everything a real website needs — from company and service pages to blog, shop, account and utility screens.</p>
+        </div>
+
+        <div class="page-grid">
+          <article class="page-card" data-reveal>
+            <a href="demo/about.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/about.svg" alt="About Us page" width="800" height="2268" loading="lazy"></div></div>
+              <h3>About Us</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.06s">
+            <a href="demo/services.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/services.svg" alt="Services page" width="800" height="2008" loading="lazy"></div></div>
+              <h3>Services</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.12s">
+            <a href="demo/service-details.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/service-details.svg" alt="Service Details page" width="800" height="2178" loading="lazy"></div></div>
+              <h3>Service Details</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.18s">
+            <a href="demo/pricing.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/pricing.svg" alt="Pricing page" width="800" height="1838" loading="lazy"></div></div>
+              <h3>Pricing</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal>
+            <a href="demo/team.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/team.svg" alt="Our Team page" width="800" height="1648" loading="lazy"></div></div>
+              <h3>Our Team</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.06s">
+            <a href="demo/portfolio.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/portfolio.svg" alt="Portfolio page" width="800" height="1452" loading="lazy"></div></div>
+              <h3>Portfolio</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.12s">
+            <a href="demo/project-details.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/project-details.svg" alt="Project Details page" width="800" height="2168" loading="lazy"></div></div>
+              <h3>Project Details</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.18s">
+            <a href="demo/blog.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/blog.svg" alt="Blog Grid page" width="800" height="1468" loading="lazy"></div></div>
+              <h3>Blog Grid</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal>
+            <a href="demo/blog-single.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/blog-single.svg" alt="Blog Details page" width="800" height="1868" loading="lazy"></div></div>
+              <h3>Blog Details</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.06s">
+            <a href="demo/shop.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/shop.svg" alt="Shop page" width="800" height="1668" loading="lazy"></div></div>
+              <h3>Shop</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.12s">
+            <a href="demo/cart.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/cart.svg" alt="Cart page" width="800" height="1708" loading="lazy"></div></div>
+              <h3>Cart</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.18s">
+            <a href="demo/contact.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/contact.svg" alt="Contact page" width="800" height="1408" loading="lazy"></div></div>
+              <h3>Contact</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal>
+            <a href="demo/faq.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/faq.svg" alt="FAQ page" width="800" height="1748" loading="lazy"></div></div>
+              <h3>FAQ</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.06s">
+            <a href="demo/login.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/login.svg" alt="Login page" width="800" height="1100" loading="lazy"></div></div>
+              <h3>Login</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.12s">
+            <a href="demo/404.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/404.svg" alt="404 Error page" width="800" height="1070" loading="lazy"></div></div>
+              <h3>404 Error</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.18s">
+            <a href="demo/coming-soon.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot shot--tall"><img src="assets/img/pages/coming-soon.svg" alt="Coming Soon page" width="800" height="1100" loading="lazy"></div></div>
+              <h3>Coming Soon</h3>
+            </a>
+          </article>
+        </div>
+
+        <div class="page-extras" data-reveal>
+          <p>Plus all the building blocks you need:</p>
+          <ul class="chip-list">
+            <li>Typography</li><li>Buttons</li><li>Forms</li><li>Tables</li><li>Tabs &amp; Accordions</li>
+            <li>Modals</li><li>Alerts</li><li>Icons</li><li>Sliders</li><li>Counters</li><li>Timelines</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features ========================================================== -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Core Features</span>
+          <h2>Everything you need, nothing you don't</h2>
+          <p>Thoughtfully engineered for developers and delightful for end users.</p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature" data-reveal><span class="feature__icon"><svg aria-hidden="true"><use href="#f-responsive"/></svg></span><h3>Fully Responsive</h3><p>Looks sharp on phones, tablets, laptops and wide screens.</p></div>
+          <div class="feature" data-reveal style="--delay:.05s"><span class="feature__icon"><svg aria-hidden="true"><use href="#i-moon"/></svg></span><h3>Dark Mode</h3><p>Built-in dark theme with system preference detection.</p></div>
+          <div class="feature" data-reveal style="--delay:.1s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-palette"/></svg></span><h3>SCSS &amp; Variables</h3><p>Change colors, fonts and spacing from one settings file.</p></div>
+          <div class="feature" data-reveal style="--delay:.15s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-code"/></svg></span><h3>Clean Code</h3><p>Semantic, W3C-valid HTML5 with tidy, commented source.</p></div>
+          <div class="feature" data-reveal><span class="feature__icon"><svg aria-hidden="true"><use href="#f-zap"/></svg></span><h3>Blazing Fast</h3><p>No jQuery, minimal JS and optimized assets for speed.</p></div>
+          <div class="feature" data-reveal style="--delay:.05s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-search"/></svg></span><h3>SEO Optimized</h3><p>Proper heading structure, meta tags and schema-ready markup.</p></div>
+          <div class="feature" data-reveal style="--delay:.1s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-a11y"/></svg></span><h3>Accessible</h3><p>Keyboard friendly, ARIA labels and WCAG-compliant contrast.</p></div>
+          <div class="feature" data-reveal style="--delay:.15s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-sparkle"/></svg></span><h3>Smooth Animations</h3><p>Subtle scroll reveals that respect reduced-motion settings.</p></div>
+          <div class="feature" data-reveal><span class="feature__icon"><svg aria-hidden="true"><use href="#f-mail"/></svg></span><h3>Working Forms</h3><p>AJAX contact &amp; newsletter forms with PHP mailer included.</p></div>
+          <div class="feature" data-reveal style="--delay:.05s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-globe"/></svg></span><h3>RTL Ready</h3><p>Right-to-left support for Arabic, Hebrew and more.</p></div>
+          <div class="feature" data-reveal style="--delay:.1s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-type"/></svg></span><h3>Google Fonts</h3><p>Beautiful type pairings, swappable with a single variable.</p></div>
+          <div class="feature" data-reveal style="--delay:.15s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-image"/></svg></span><h3>Retina Ready</h3><p>Crisp SVG icons and high-DPI friendly graphics.</p></div>
+          <div class="feature" data-reveal><span class="feature__icon"><svg aria-hidden="true"><use href="#f-layers"/></svg></span><h3>Gulp Workflow</h3><p>Live reload, SCSS compiling and asset minification.</p></div>
+          <div class="feature" data-reveal style="--delay:.05s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-book"/></svg></span><h3>Documentation</h3><p>Step-by-step guide to set up and customize everything.</p></div>
+          <div class="feature" data-reveal style="--delay:.1s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-refresh"/></svg></span><h3>Lifetime Updates</h3><p>New demos, pages and improvements — free, forever.</p></div>
+          <div class="feature" data-reveal style="--delay:.15s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-support"/></svg></span><h3>Premium Support</h3><p>Fast, friendly help from the people who built it.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Performance ======================================================= -->
+    <section class="section section--dark" id="performance">
+      <div class="container">
+        <div class="perf">
+          <div class="perf__body" data-reveal>
+            <span class="eyebrow">Performance</span>
+            <h2>Fast by default. Built to score.</h2>
+            <p>Lightweight markup, zero jQuery and carefully optimized assets mean your site loads instantly — which keeps visitors happy and search engines happier.</p>
+            <div class="perf__meta">
+              <div><strong>0</strong><span>jQuery dependency</span></div>
+              <div><strong>&lt; 40kb</strong><span>Core JS (gzip)</span></div>
+              <div><strong>0.8s</strong><span>First contentful paint</span></div>
+            </div>
+          </div>
+          <div class="scores" data-reveal style="--delay:.1s">
+            <div class="score"><div class="ring" data-score="98"><b>98</b></div><h3>Performance</h3></div>
+            <div class="score"><div class="ring" data-score="100"><b>100</b></div><h3>Accessibility</h3></div>
+            <div class="score"><div class="ring" data-score="100"><b>100</b></div><h3>Best Practices</h3></div>
+            <div class="score"><div class="ring" data-score="100"><b>100</b></div><h3>SEO</h3></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews =========================================================== -->
+    <section class="section section--soft" id="reviews">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Customer Reviews</span>
+          <h2>Loved by developers &amp; designers</h2>
+          <p>Here's what our customers have to say about Nexora.</p>
+        </div>
+
+        <div class="rating-summary" data-reveal>
+          <strong>4.9</strong>
+          <div>
+            <span class="stars" aria-label="Rated 4.9 out of 5">
+              <svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg>
+            </span>
+            <small>Based on 380+ ratings</small>
+          </div>
+        </div>
+
+        <div class="review-grid">
+          <figure class="review" data-reveal>
+            <div class="review__top">
+              <span class="stars" aria-label="5 out of 5"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+              <span class="review__tag">Design Quality</span>
+            </div>
+            <blockquote>“The attention to detail is outstanding. I launched a client site in two days and they thought we'd designed it from scratch.”</blockquote>
+            <figcaption class="review__author"><span class="avatar" style="--c:#5b5bf7">JM</span><div><b>jmarlow_dev</b><span>Freelance developer</span></div></figcaption>
+          </figure>
+          <figure class="review" data-reveal style="--delay:.08s">
+            <div class="review__top">
+              <span class="stars" aria-label="5 out of 5"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+              <span class="review__tag">Code Quality</span>
+            </div>
+            <blockquote>“Finally a template without jQuery bloat. The SCSS is organized, the markup is semantic and everything is easy to extend.”</blockquote>
+            <figcaption class="review__author"><span class="avatar" style="--c:#12b981">SK</span><div><b>studio_kova</b><span>Agency owner</span></div></figcaption>
+          </figure>
+          <figure class="review" data-reveal style="--delay:.16s">
+            <div class="review__top">
+              <span class="stars" aria-label="5 out of 5"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+              <span class="review__tag">Customer Support</span>
+            </div>
+            <blockquote>“Had a question about the contact form setup and got a detailed answer within hours. Support like this is rare.”</blockquote>
+            <figcaption class="review__author"><span class="avatar" style="--c:#ff6b4a">AR</span><div><b>arivera</b><span>Startup founder</span></div></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Changelog ========================================================= -->
+    <section class="section" id="changelog">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Changelog</span>
+          <h2>Actively maintained &amp; regularly updated</h2>
+          <p>We ship improvements every month. Updates are always free for existing customers.</p>
+        </div>
+
+        <div class="changelog">
+          <div class="release" data-reveal>
+            <div class="release__head"><h3>Version 2.4</h3><time datetime="2026-11-01">November 1, 2026</time><span class="release__latest">Latest</span></div>
+            <ul>
+              <li><span class="tag tag--new">New</span>4 new demos: Fintech, Fashion Store, Architecture and Medical</li>
+              <li><span class="tag tag--new">New</span>Dark mode for all pages with system preference detection</li>
+              <li><span class="tag tag--improved">Improved</span>Upgraded to the latest Bootstrap 5 release</li>
+              <li><span class="tag tag--fixed">Fixed</span>Mobile menu focus trap on iOS Safari</li>
+            </ul>
+          </div>
+          <div class="release" data-reveal>
+            <div class="release__head"><h3>Version 2.3</h3><time datetime="2026-08-14">August 14, 2026</time></div>
+            <ul>
+              <li><span class="tag tag--new">New</span>Shop, cart and checkout pages</li>
+              <li><span class="tag tag--improved">Improved</span>Lighthouse performance score raised to 98</li>
+              <li><span class="tag tag--fixed">Fixed</span>Pricing toggle alignment in RTL mode</li>
+            </ul>
+          </div>
+          <details>
+            <summary class="btn btn--outline btn--sm">Show older releases</summary>
+            <div class="release">
+              <div class="release__head"><h3>Version 2.0</h3><time datetime="2026-04-02">April 2, 2026</time></div>
+              <ul>
+                <li><span class="tag tag--new">New</span>Removed jQuery — rewritten in vanilla ES6</li>
+                <li><span class="tag tag--new">New</span>RTL support and 60 new UI blocks</li>
+                <li><span class="tag tag--improved">Improved</span>Completely revised documentation</li>
+              </ul>
+            </div>
+            <div class="release">
+              <div class="release__head"><h3>Version 1.0</h3><time datetime="2025-12-10">December 10, 2025</time></div>
+              <ul>
+                <li><span class="tag tag--new">New</span>Initial release with 8 homepages and 50+ inner pages</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ =============================================================== -->
+    <section class="section section--soft" id="faq">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">FAQ</span>
+          <h2>Frequently asked questions</h2>
+          <p>Can't find what you're looking for? Our support team is happy to help.</p>
+        </div>
+
+        <div class="faq-grid">
+          <div>
+            <details class="faq" open>
+              <summary>What do I get when I purchase Nexora?</summary>
+              <p>You get all 12 homepages, 80+ inner pages, 250+ UI blocks, the full SCSS source, a Gulp workflow, PHP contact form and detailed documentation.</p>
+            </details>
+            <details class="faq">
+              <summary>Do I need coding knowledge to use it?</summary>
+              <p>Basic HTML and CSS knowledge is enough to edit content. The documentation walks you through every step, from setup to deployment.</p>
+            </details>
+            <details class="faq">
+              <summary>Can I use Nexora for client projects?</summary>
+              <p>Yes. A Regular License covers one end product for you or one client. If your end users are charged, you'll need an Extended License.</p>
+            </details>
+          </div>
+          <div>
+            <details class="faq">
+              <summary>Are future updates free?</summary>
+              <p>Absolutely. Once you purchase Nexora, all future updates — including new demos and pages — are free forever.</p>
+            </details>
+            <details class="faq">
+              <summary>Is it compatible with all browsers?</summary>
+              <p>Nexora is tested on the latest versions of Chrome, Firefox, Safari, Edge and Opera, on both desktop and mobile.</p>
+            </details>
+            <details class="faq">
+              <summary>How do I get support?</summary>
+              <p>Every purchase includes 6 months of premium support through our support portal. Most tickets are answered within 24 hours.</p>
+            </details>
+          </div>
+        </div>
+
+        <p class="faq-more" data-reveal>Still have questions? <a href="mailto:support@example.com">Contact our support team →</a></p>
+      </div>
+    </section>
+
+    <!-- CTA =============================================================== -->
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="cta__box" data-reveal>
+          <div>
+            <span class="eyebrow">Get Started</span>
+            <h2 id="cta-title">Start building with Nexora today</h2>
+            <p>Join 2,400+ customers who launch faster, look better and spend less time on boilerplate.</p>
+            <div class="cta__actions">
+              <a class="btn" href="https://themeforest.net/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-cart"/></svg> Buy Now for $19</a>
+              <a class="btn btn--ghost" href="#demos"><svg aria-hidden="true"><use href="#i-eye"/></svg> View Demos</a>
+            </div>
+          </div>
+          <div class="price-card">
+            <span class="price-card__label">Regular License</span>
+            <div class="price-card__amount"><strong>$19</strong><s>$49</s></div>
+            <ul class="check-list">
+              <li>All 12 demos &amp; 80+ pages</li>
+              <li>Free lifetime updates</li>
+              <li>6 months premium support</li>
+              <li>Detailed documentation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer ============================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="logo" href="#top" aria-label="Nexora home">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="url(#lg-logo)"/><path d="M12 28V12l16 16V12" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Nexora
+          </a>
+          <p>A modern multipurpose HTML5 template for businesses, agencies, startups and creatives.</p>
+          <div class="socials">
+            <a href="#" aria-label="X (Twitter)"><svg aria-hidden="true"><use href="#s-x"/></svg></a>
+            <a href="#" aria-label="Dribbble"><svg aria-hidden="true"><use href="#s-dribbble"/></svg></a>
+            <a href="#" aria-label="GitHub"><svg aria-hidden="true"><use href="#s-github"/></svg></a>
+            <a href="#" aria-label="YouTube"><svg aria-hidden="true"><use href="#s-youtube"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#demos">Demos</a></li>
+            <li><a href="#pages">Inner Pages</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#changelog">Changelog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Getting Started</a></li>
+            <li><a href="#">Customization</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="mailto:support@example.com">Contact Us</a></li>
+            <li><a href="#">Licensing</a></li>
+            <li><a href="https://themeforest.net/" target="_blank" rel="noopener">Buy Nexora</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span id="year">2026</span> Nexora. All rights reserved.</span>
+        <span>Crafted with care by Your Studio</span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" type="button" aria-label="Back to top"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
