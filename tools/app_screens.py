@@ -312,6 +312,8 @@ class AppCanvas(Canvas):
                     s = status[r % len(status)]
                     col = {"Paid": GREEN, "Active": GREEN, "Delivered": GREEN, "In Stock": GREEN, "Completed": GREEN,
                            "Pending": AMBER, "Low Stock": AMBER, "Shipped": BLUE, "Draft": c["subtle"],
+                           "Subscribed": GREEN, "Approved": GREEN, "Running": BLUE, "Scheduled": AMBER,
+                           "Paused": c["subtle"], "Opted out": RED, "Rejected": RED,
                            "Failed": RED, "Out of Stock": RED, "Cancelled": RED}.get(s, c["p"])
                     self.pill(cx, ry + 17, s, col)
                 elif progress and i == len(cols) - 2:
@@ -959,6 +961,435 @@ class AppCanvas(Canvas):
         self.text(cx + cw_ / 2 + 100, fy + 270, "Gallery", 12, "#3c434a", 600, anchor="middle", spacing=0)
         self.y = H
 
+    # ------------------------------------------------------- messaging screens
+    def bubble(self, x, y, w, lines, out=False, ticks=False, time=True):
+        c = self.c
+        h = 22 + lines * 15 + (10 if time else 0)
+        fill = mix(c["p"], "#ffffff", 0.8) if out else "#ffffff"
+        self.rect(x, y, w, h, fill, r=12, extra='' if out else f'stroke="{c["border"]}"')
+        for li in range(lines):
+            lw = (w - 28) * (0.55 if li == lines - 1 and lines > 1 else 1)
+            self.rect(x + 14, y + 14 + li * 15, lw, 7, mix(c["p"], "#000000", 0.35) if out else c["muted"], r=3,
+                      extra='opacity="0.45"' if out else "")
+        if time:
+            self.rect(x + w - (52 if ticks else 36), y + h - 14, 24, 5, c["subtle"], r=2, extra='opacity="0.5"')
+        if ticks:
+            for k in range(2):
+                tx = x + w - 24 + k * 5
+                self.add(f'<path d="M{tx} {y + h - 12} l3 3 6 -7" fill="none" stroke="{BLUE}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>')
+        return h
+
+    def chat_bg(self, x, y, w, h, r=0):
+        c = self.c
+        pid = self.uid("pt")
+        self.defs.append(f'<pattern id="{pid}" width="26" height="26" patternUnits="userSpaceOnUse">'
+                         f'<circle cx="4" cy="4" r="1.6" fill="{mix(c["p"], "#ffffff", 0.82)}"/>'
+                         f'<circle cx="17" cy="17" r="1.2" fill="{mix(c["p"], "#ffffff", 0.86)}"/></pattern>')
+        self.rect(x, y, w, h, mix(c["p"], "#ffffff", 0.94), r=r)
+        self.rect(x, y, w, h, f"url(#{pid})", r=r)
+
+    def phone(self, x, y, w, h, business="Replyo Store", template=True):
+        c = self.c
+        sh = self.shadow()
+        self.rect(x, y, w, h, "#0b1020", r=36, extra=sh)
+        sx, sy, sw, shh = x + 10, y + 10, w - 20, h - 20
+        clip = self.uid("ph")
+        self.defs.append(f'<clipPath id="{clip}"><rect x="{sx}" y="{sy}" width="{sw}" height="{shh}" rx="28"/></clipPath>')
+        self.add(f'<g clip-path="url(#{clip})">')
+        self.chat_bg(sx, sy, sw, shh)
+        hd = mix(c["p"], "#000000", 0.25)
+        self.rect(sx, sy, sw, 78, hd)
+        self.rect(sx + sw / 2 - 40, sy + 8, 80, 18, "#0b1020", r=9)
+        self.circle(sx + 34, sy + 52, 15, "#ffffff", 'opacity="0.9"')
+        self.rect(sx + 26, sy + 44, 16, 16, c["p"], r=4)
+        self.text(sx + 58, sy + 50, business, 13, "#ffffff", 700, spacing=0)
+        self.text(sx + 58, sy + 66, "Business account", 10, "#ffffffbb", 500, spacing=0)
+        by = sy + 96
+        self.rect(sx + sw / 2 - 26, by, 52, 18, "#ffffffcc", r=9)
+        self.text(sx + sw / 2, by + 13, "Today", 10, c["subtle"], 600, anchor="middle", spacing=0)
+        by += 32
+        bw = sw - 50
+        if template:
+            th = 300
+            self.rect(sx + 14, by, bw, th, "#ffffff", r=12)
+            self.image(sx + 20, by + 6, bw - 12, 120, r=9, kind="abstract")
+            self.text(sx + 26, by + 148, "Summer Sale is live!", 13, c["heading"], 800, spacing=0)
+            self.lines(sx + 26, by + 162, bw - 40, 4, h=6, gap=13)
+            self.rect(sx + 26, by + 222, 80, 5, c["muted"], r=2)
+            self.rect(sx + 14, by + 242, bw, 1, c["border"])
+            self.text(sx + 14 + bw / 2, by + 266, "Shop now", 12, c["p"], 700, anchor="middle", spacing=0)
+            self.rect(sx + 14, by + 280, bw, 1, c["border"])
+            self.text(sx + 14 + bw / 2, by + 296, "View offers", 12, c["p"], 700, anchor="middle", spacing=0)
+            by += th + 14
+            self.bubble(sx + sw - 24 - bw * 0.62, by, bw * 0.62, 1, out=True, ticks=True)
+        self.rect(sx + 10, sy + shh - 52, sw - 64, 40, "#ffffff", r=20)
+        self.circle(sx + sw - 30, sy + shh - 32, 20, c["p"])
+        self.add("</g>")
+
+    def flow_builder(self, x, y, w, h):
+        c = self.c
+        pw = 230
+        self.card(x, y, pw, h, r=14)
+        self.text(x + 20, y + 36, "Blocks", 15, c["heading"], 700, spacing=0)
+        blocks = [("Send Message", c["p"]), ("Buttons", BLUE), ("List Menu", "#8b5cf6"), ("Media", AMBER), ("Condition", "#ec4899"),
+                  ("Delay", c["subtle"]), ("AI Reply", "#8b5cf6"), ("Assign Agent", GREEN), ("Add Tag", AMBER), ("Webhook", "#475569"),
+                  ("Save Answer", BLUE), ("End Chat", RED)]
+        for i, (t, col) in enumerate(blocks):
+            by = y + 56 + i * 48
+            if by + 40 > y + h - 10:
+                break
+            self.rect(x + 16, by, pw - 32, 40, c["surface"], r=10)
+            self.rect(x + 28, by + 10, 20, 20, mix(col, c["card"], 0.8), r=6)
+            self.rect(x + 34, by + 16, 8, 8, col, r=2)
+            self.text(x + 60, by + 25, t, 12, c["heading"], 600, spacing=0)
+            self.rect(x + pw - 40, by + 17, 10, 6, c["muted"], r=2)
+        cx, cw_ = x + pw + 20, w - pw - 20
+        self.rect(cx, y, cw_, h, c["card"], r=14, extra=f'stroke="{c["border"]}"')
+        pid = self.uid("dt")
+        self.defs.append(f'<pattern id="{pid}" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.3" fill="{c["muted"]}"/></pattern>')
+        self.rect(cx + 1, y + 1, cw_ - 2, h - 2, f"url(#{pid})", r=14)
+        # toolbar
+        self.rect(cx + 16, y + 16, 250, 38, c["card"], r=10, extra=f'stroke="{c["border"]}"')
+        self.text(cx + 32, y + 40, "Welcome Flow", 14, c["heading"], 700, spacing=0)
+        self.pill(cx + 194, y + 24, "Live", GREEN, w=52)
+        self.button(cx + cw_ - 236, y + 16, 96, 38, filled=False)
+        self.button(cx + cw_ - 128, y + 16, 112, 38)
+        sh = self.shadow()
+
+        def node(nx, ny, nw, nh, title, col, kind):
+            self.rect(nx, ny, nw, nh, c["card"], r=12, extra=f'stroke="{c["border"]}" {sh}')
+            self.rect(nx, ny, nw, 36, mix(col, c["card"], 0.86), r=12)
+            self.rect(nx, ny + 24, nw, 12, mix(col, c["card"], 0.86))
+            self.rect(nx + 12, ny + 9, 18, 18, col, r=5)
+            self.text(nx + 38, ny + 23, title, 12, c["heading"], 700, spacing=0)
+            self.circle(nx + nw - 18, ny + 18, 3, c["subtle"])
+            bx, byy = nx + 12, ny + 48
+            if kind == "trigger":
+                self.label(bx, byy + 10, "When message contains", 11)
+                px = bx
+                for t in ["hi", "hello", "start"]:
+                    px += self.pill(px, byy + 22, t, col) + 6
+                self.label(bx, byy + 68, "Any time · All contacts", 11)
+            elif kind == "message":
+                self.bubble(bx, byy, nw - 24, 3, out=True, time=False)
+                self.label(bx, byy + 82, "Delay 2 sec", 11)
+            elif kind == "buttons":
+                self.bubble(bx, byy, nw - 24, 2, out=True, time=False)
+                for k, t in enumerate(["View pricing", "Book a demo", "Talk to an agent"]):
+                    yy = byy + 60 + k * 34
+                    self.rect(bx, yy, nw - 24, 28, c["surface"], r=8)
+                    self.text(bx + (nw - 24) / 2, yy + 18, t, 11, BLUE, 700, anchor="middle", spacing=0)
+            elif kind == "media":
+                self.image(bx, byy, nw - 24, 70, r=8, kind="abstract")
+                self.rect(bx, byy + 80, (nw - 24) * 0.7, 7, c["muted"], r=3)
+            elif kind == "ai":
+                self.label(bx, byy + 10, "Answer with knowledge base", 11)
+                self.rect(bx, byy + 20, nw - 24, 34, c["surface"], r=8)
+                self.rect(bx + 10, byy + 34, (nw - 44) * 0.7, 6, c["muted"], r=3)
+                self.pill(bx, byy + 64, "Fallback: agent", "#8b5cf6")
+            elif kind == "assign":
+                for k in range(2):
+                    self.avatar(bx + 14, byy + 14 + k * 34, 13, k + 1)
+                    self.rect(bx + 34, byy + 10 + k * 34, 90, 8, c["heading"], r=4, extra='opacity="0.7"')
+                self.label(bx, byy + 82, "Round robin · Sales team", 11)
+            # ports
+            self.circle(nx, ny + nh / 2, 6, c["card"], f'stroke="{col}" stroke-width="2.5"')
+            self.circle(nx + nw, ny + nh / 2, 6, col)
+
+        X = lambda f: cx + 30 + f
+        Y = lambda f: y + 80 + f
+        nodes = {
+            "A": (X(0), Y(70), 220, 140, "Trigger", GREEN, "trigger"),
+            "B": (X(300), Y(40), 230, 150, "Send Message", c["p"], "message"),
+            "C": (X(600), Y(40), 230, 220, "Buttons", BLUE, "buttons"),
+            "D": (X(600), Y(420), 230, 150, "Send Media", AMBER, "media"),
+            "E": (X(300), Y(420), 230, 150, "AI Reply", "#8b5cf6", "ai"),
+            "F": (X(0), Y(420), 220, 150, "Assign Agent", GREEN, "assign"),
+        }
+
+        def link(a, b, label=None, side=False):
+            ax, ay, aw, ah = nodes[a][:4]
+            bx_, by_, bw_, bh_ = nodes[b][:4]
+            if side:
+                x1, y1, x2, y2 = ax + aw, ay + ah / 2, bx_, by_ + bh_ / 2
+                d = f"M{x1:.1f} {y1:.1f} C{x1 + 50:.1f} {y1:.1f} {x2 - 50:.1f} {y2:.1f} {x2:.1f} {y2:.1f}"
+                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            else:
+                x1, y1, x2, y2 = ax + aw / 2, ay + ah, bx_ + bw_ / 2, by_
+                d = f"M{x1:.1f} {y1:.1f} C{x1:.1f} {y1 + 60:.1f} {x2:.1f} {y2 - 60:.1f} {x2:.1f} {y2:.1f}"
+                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            self.add(f'<path d="{d}" fill="none" stroke="{c["p"]}" stroke-width="2.5" stroke-linecap="round"/>')
+            if label:
+                lw = len(label) * 6.5 + 18
+                self.rect(mx - lw / 2, my - 11, lw, 22, c["card"], r=11, extra=f'stroke="{c["p"]}"')
+                self.text(mx, my + 4, label, 10, c["p"], 700, anchor="middle", spacing=0)
+
+        link("A", "B", side=True)
+        link("B", "C", side=True)
+        link("C", "D", "Pricing")
+        link("C", "E", "Demo")
+        link("C", "F", "Agent")
+        for k in nodes:
+            node(*nodes[k])
+        # minimap
+        mmx, mmy = cx + cw_ - 196, y + h - 136
+        self.rect(mmx, mmy, 180, 120, c["card"], r=10, extra=f'stroke="{c["border"]}"')
+        for k, (fx, fy) in enumerate([(0.05, 0.2), (0.38, 0.12), (0.7, 0.12), (0.05, 0.62), (0.38, 0.62), (0.7, 0.62)]):
+            self.rect(mmx + 10 + fx * 160, mmy + 10 + fy * 100, 40, 24, mix(c["p"], c["card"], 0.75), r=4)
+        self.rect(mmx + 8, mmy + 8, 120, 80, "none", r=6, extra=f'stroke="{c["p"]}" stroke-width="1.5"')
+        # zoom controls
+        self.rect(cx + 16, y + h - 54, 120, 38, c["card"], r=10, extra=f'stroke="{c["border"]}"')
+        for k, t in enumerate(["–", "100%", "+"]):
+            self.text(cx + 34 + k * 42, y + h - 30, t, 12, c["subtle"], 700, anchor="middle", spacing=0)
+
+    def inbox(self, x, y, w, h):
+        c = self.c
+        self.card(x, y, w, h, r=14)
+        lw, iw = 270, 240
+        mx, mw = x + lw, w - lw - iw
+        self.rect(x + lw, y, 1, h, c["border"])
+        self.rect(x + w - iw, y, 1, h, c["border"])
+        # conversation list
+        self.rect(x + 16, y + 16, lw - 32, 36, c["surface"], r=10)
+        self.rect(x + 34, y + 30, 100, 8, c["muted"], r=4)
+        tx = x + 16
+        for i, t in enumerate(["All 24", "Mine 8", "Unassigned 5"]):
+            tw = len(t) * 7 + 18
+            self.rect(tx, y + 64, tw, 26, c["p"] if i == 0 else c["surface"], r=13)
+            self.text(tx + tw / 2, y + 81, t, 11, "#ffffff" if i == 0 else c["subtle"], 700, anchor="middle", spacing=0)
+            tx += tw + 6
+        names = ["Sarah Johnson", "Mike Chen", "Priya Patel", "Lucas Silva", "Emma Wilson", "Omar Haddad", "Grace Kim", "Noah Brown", "Ava Rossi"]
+        for r in range(9):
+            ry = y + 104 + r * 66
+            if ry + 60 > y + h:
+                break
+            if r == 0:
+                self.rect(x + 8, ry - 4, lw - 16, 62, c["soft"], r=10)
+            self.avatar(x + 38, ry + 26, 20, r)
+            self.text(x + 68, ry + 20, names[r], 12, c["heading"], 700, spacing=0)
+            self.rect(x + 68, ry + 30, 130 - (r * 17) % 50, 7, c["muted"], r=3)
+            self.rect(x + lw - 50, ry + 12, 30, 6, c["muted"], r=3)
+            if r in (0, 2, 5):
+                self.circle(x + lw - 30, ry + 36, 9, c["p"])
+                self.text(x + lw - 30, ry + 40, str([2, 5, 1][[0, 2, 5].index(r)]), 10, "#ffffff", 700, anchor="middle", spacing=0)
+            if r in (1, 3):
+                self.pill(x + 68, ry + 42, ["Sales", "Support"][r // 2], [BLUE, AMBER][r // 2])
+        # chat header
+        self.avatar(mx + 38, y + 36, 19, 0)
+        self.text(mx + 66, y + 32, "Sarah Johnson", 14, c["heading"], 700, spacing=0)
+        self.label(mx + 66, y + 50, "+1 415 555 0132", 11)
+        self.button(mx + mw - 200, y + 18, 84, 34, filled=False)
+        self.button(mx + mw - 106, y + 18, 90, 34)
+        self.rect(mx, y + 70, mw, 1, c["border"])
+        self.chat_bg(mx + 1, y + 71, mw - 2, h - 71 - 80)
+        by = y + 90
+        self.rect(mx + mw / 2 - 28, by, 56, 20, "#ffffff", r=10)
+        self.text(mx + mw / 2, by + 14, "Today", 10, c["subtle"], 600, anchor="middle", spacing=0)
+        by += 36
+        by += self.bubble(mx + 20, by, mw * 0.55, 2) + 12
+        tw = mw * 0.6
+        tx = mx + mw - tw - 20
+        self.rect(tx, by, tw, 190, mix(c["p"], "#ffffff", 0.8), r=12)
+        self.image(tx + 6, by + 6, tw - 12, 80, r=9, kind="abstract")
+        self.rect(tx + 14, by + 98, tw * 0.5, 9, c["heading"], r=4, extra='opacity="0.75"')
+        self.lines(tx + 14, by + 116, tw - 28, 2, mix(c["p"], "#000000", 0.35) + "77", h=7, gap=14)
+        for k, t in enumerate(["Book a demo", "See pricing"]):
+            self.rect(tx + 8 + k * (tw / 2 - 4), by + 152, tw / 2 - 12, 30, "#ffffff", r=8)
+            self.text(tx + 8 + k * (tw / 2 - 4) + (tw / 2 - 12) / 2, by + 171, t, 11, c["p"], 700, anchor="middle", spacing=0)
+        by += 204
+        by += self.bubble(mx + 20, by, mw * 0.4, 1) + 12
+        self.rect(mx + 60, by, mw - 120, 46, mix(AMBER, "#ffffff", 0.85), r=10)
+        self.text(mx + 76, by + 19, "Internal note", 10, mix(AMBER, "#000000", 0.35), 700, spacing=0)
+        self.rect(mx + 76, by + 28, mw * 0.4, 6, mix(AMBER, "#000000", 0.2), r=3, extra='opacity="0.45"')
+        by += 58
+        if by + 60 < y + h - 90:
+            self.bubble(mx + mw - mw * 0.5 - 20, by, mw * 0.5, 2, out=True, ticks=True)
+        # composer
+        cy_ = y + h - 80
+        tx = mx + 16
+        for t in ["Pricing", "Business hours", "Thanks!"]:
+            tw2 = len(t) * 6.5 + 16
+            self.rect(tx, cy_ + 8, tw2, 22, c["surface"], r=11)
+            self.text(tx + tw2 / 2, cy_ + 23, t, 10, c["subtle"], 600, anchor="middle", spacing=0)
+            tx += tw2 + 6
+        self.rect(mx + 16, cy_ + 36, mw - 76, 34, c["surface"], r=17)
+        self.rect(mx + 36, cy_ + 50, 120, 7, c["muted"], r=3)
+        self.circle(mx + mw - 34, cy_ + 53, 17, c["p"])
+        self.add(f'<path d="M{mx + mw - 41} {cy_ + 53} l14 -6 -5 14 -2 -6z" fill="#fff"/>')
+        # contact info
+        ix = x + w - iw
+        self.avatar(ix + iw / 2, y + 66, 34, 0)
+        self.text(ix + iw / 2, y + 124, "Sarah Johnson", 14, c["heading"], 700, anchor="middle", spacing=0)
+        self.label(ix + iw / 2, y + 142, "Subscribed · Opted in", 11, anchor="middle")
+        sy = y + 170
+        for title, kind in [("Tags", "tags"), ("Assigned to", "agent"), ("Attributes", "attrs"), ("Notes", "notes")]:
+            self.rect(ix + 16, sy, iw - 32, 1, c["border"])
+            self.label(ix + 20, sy + 26, title.upper(), 10, weight=700)
+            if kind == "tags":
+                px = ix + 20
+                for t, col in [("VIP", AMBER), ("Lead", BLUE), ("Shopify", GREEN)]:
+                    px += self.pill(px, sy + 38, t, col) + 6
+                sy += 76
+            elif kind == "agent":
+                self.avatar(ix + 34, sy + 50, 13, 3)
+                self.rect(ix + 54, sy + 46, 90, 8, c["heading"], r=4, extra='opacity="0.7"')
+                sy += 80
+            elif kind == "attrs":
+                for k in range(3):
+                    self.rect(ix + 20, sy + 42 + k * 24, 60, 7, c["muted"], r=3)
+                    self.rect(ix + iw - 100, sy + 42 + k * 24, 80, 7, c["heading"], r=3, extra='opacity="0.6"')
+                sy += 116
+            else:
+                self.lines(ix + 20, sy + 42, iw - 40, 3, h=7, gap=14)
+
+    def campaign_new(self, x, y, w, h):
+        c = self.c
+        steps = ["Audience", "Template", "Schedule", "Review"]
+        self.card(x, y, w, 76, r=14)
+        sw_ = (w - 80) / 4
+        for i, t in enumerate(steps):
+            sx = x + 40 + i * sw_
+            if i < 3:
+                self.rect(sx + 34, y + 37, sw_ - 44, 2, c["p"] if i < 1 else c["border"])
+            col = c["p"] if i <= 1 else c["muted"]
+            self.circle(sx + 16, y + 38, 15, col if i <= 1 else c["surface"], "" if i <= 1 else f'stroke="{c["border"]}"')
+            if i == 0:
+                self.add(f'<path d="M{sx + 10} {y + 38} l4 4 8 -9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>')
+            else:
+                self.text(sx + 16, y + 43, str(i + 1), 12, "#ffffff" if i == 1 else c["subtle"], 700, anchor="middle", spacing=0)
+            self.text(sx + 40, y + 43, t, 13, c["heading"] if i <= 1 else c["subtle"], 700, spacing=0)
+        fy = y + 96
+        fw = w - 360
+        self.card(x, fy, fw, h - 96, r=14)
+        self.text(x + 28, fy + 40, "Choose a message template", 16, c["heading"], 800, spacing=-0.2)
+        self.label(x + 28, fy + 62, "Only templates approved by WhatsApp can be used for campaigns", 12)
+        self.label(x + 28, fy + 100, "Template", 12, c["heading"], 700)
+        self.rect(x + 28, fy + 110, fw - 56, 44, c["surface"], r=10, extra=f'stroke="{c["p"]}" stroke-width="1.5"')
+        self.text(x + 46, fy + 137, "summer_sale_v2", 13, c["heading"], 600, spacing=0)
+        self.pill(x + fw - 150, fy + 121, "Approved", GREEN, w=84)
+        self.label(x + 28, fy + 190, "Variables", 12, c["heading"], 700)
+        for k, (var, val) in enumerate([("{{1}}", "Contact first name"), ("{{2}}", "Discount code"), ("{{3}}", "Expiry date")]):
+            vy = fy + 202 + k * 54
+            self.rect(x + 28, vy, 80, 42, c["soft"], r=9)
+            self.text(x + 68, vy + 26, var, 12, c["p"], 700, anchor="middle", spacing=0)
+            self.rect(x + 120, vy, fw - 148, 42, c["surface"], r=9, extra=f'stroke="{c["border"]}"')
+            self.text(x + 136, vy + 26, val, 12, c["subtle"], 500, spacing=0)
+        ay = fy + 380
+        self.label(x + 28, ay, "Audience", 12, c["heading"], 700)
+        px = x + 28
+        for t, n in [("VIP customers", "1,248"), ("Newsletter", "8,420"), ("Abandoned cart", "362")]:
+            tw = len(t) * 7 + len(n) * 7 + 40
+            self.rect(px, ay + 12, tw, 34, c["soft"] if t != "Abandoned cart" else c["surface"], r=17,
+                      extra=f'stroke="{c["p"]}"' if t != "Abandoned cart" else "")
+            self.text(px + 14, ay + 34, t, 12, c["p"] if t != "Abandoned cart" else c["subtle"], 700, spacing=0)
+            self.text(px + tw - 14, ay + 34, n, 11, c["subtle"], 600, anchor="end", spacing=0)
+            px += tw + 10
+        self.label(x + 28, ay + 82, "9,668 contacts selected · Estimated cost shown before sending", 12)
+        self.button(x + fw - 268, fy + h - 96 - 68, 110, 44, filled=False)
+        self.button(x + fw - 146, fy + h - 96 - 68, 118, 44)
+        self.phone(x + fw + 40, fy, 300, h - 96)
+
+    def wa_templates(self, x, y, w):
+        c = self.c
+        tx = x
+        for i, t in enumerate(["All", "Marketing", "Utility", "Authentication"]):
+            tw = len(t) * 8 + 32
+            self.rect(tx, y, tw, 34, c["p"] if i == 0 else c["card"], r=17, extra="" if i == 0 else f'stroke="{c["border"]}"')
+            self.text(tx + tw / 2, y + 22, t, 12, "#ffffff" if i == 0 else c["subtle"], 600, anchor="middle", spacing=0)
+            tx += tw + 10
+        self.button(x + w - 170, y - 2, 170, 38)
+        cw_ = (w - 2 * 24) / 3
+        data = [("order_confirmation", "Utility", "Approved", False), ("summer_sale_v2", "Marketing", "Approved", True),
+                ("otp_login_code", "Authentication", "Approved", False), ("cart_reminder", "Marketing", "Pending", True),
+                ("appointment_reminder", "Utility", "Approved", False), ("feedback_request", "Marketing", "Rejected", False)]
+        for i, (name, cat, st, img) in enumerate(data):
+            cx = x + (i % 3) * (cw_ + 24)
+            cy = y + 58 + (i // 3) * 330
+            self.card(cx, cy, cw_, 310, r=14)
+            self.text(cx + 20, cy + 32, name, 13, c["heading"], 700, spacing=0)
+            self.pill(cx + 20, cy + 44, cat, {"Utility": BLUE, "Marketing": "#ec4899", "Authentication": "#8b5cf6"}[cat])
+            self.label(cx + cw_ - 20, cy + 60, "EN", 11, anchor="end", weight=700)
+            self.chat_bg(cx + 1, cy + 80, cw_ - 2, 170)
+            bw = cw_ - 60
+            by = cy + 96
+            bh = 110 + (70 if img else 0)
+            bh = min(bh, 146)
+            self.rect(cx + 20, by, bw, bh, "#ffffff", r=10)
+            yy = by + 8
+            if img:
+                self.image(cx + 26, yy, bw - 12, 50, r=7, kind="abstract")
+                yy += 60
+            self.lines(cx + 32, yy + 4, bw - 24, 3 if not img else 2, h=6, gap=13)
+            if not img or True:
+                self.rect(cx + 20, by + bh - 30, bw, 1, c["border"])
+                self.text(cx + 20 + bw / 2, by + bh - 11, "View details" if cat != "Authentication" else "Copy code", 11, c["p"], 700, anchor="middle", spacing=0)
+            self.rect(cx + 1, cy + 250, cw_ - 2, 1, c["border"])
+            self.pill(cx + 20, cy + 268, st, {"Approved": GREEN, "Pending": AMBER, "Rejected": RED}[st])
+            self.rect(cx + cw_ - 100, cy + 276, 80, 7, c["muted"], r=3)
+        return 58 + 2 * 330
+
+    def widget(self, x, y, w, h):
+        c = self.c
+        fw = 380
+        self.card(x, y, fw, h, r=14)
+        self.text(x + 24, y + 40, "Chat Widget", 16, c["heading"], 800, spacing=-0.2)
+        self.label(x + 24, y + 62, "Add a click-to-chat button to any website", 12)
+        yy = y + 96
+        for lab in ["WhatsApp number", "Agent name"]:
+            self.label(x + 24, yy, lab, 12, c["heading"], 700)
+            self.rect(x + 24, yy + 10, fw - 48, 40, c["surface"], r=9, extra=f'stroke="{c["border"]}"')
+            self.rect(x + 38, yy + 26, 120, 8, c["muted"], r=4)
+            yy += 74
+        self.label(x + 24, yy, "Welcome message", 12, c["heading"], 700)
+        self.rect(x + 24, yy + 10, fw - 48, 74, c["surface"], r=9, extra=f'stroke="{c["border"]}"')
+        self.lines(x + 38, yy + 28, fw - 76, 2, h=7, gap=14)
+        yy += 108
+        self.label(x + 24, yy, "Brand color", 12, c["heading"], 700)
+        for k, col in enumerate([c["p"], BLUE, "#8b5cf6", "#ec4899", AMBER, "#111827"]):
+            self.circle(x + 40 + k * 40, yy + 30, 13, col, f'stroke="{c["card"]}" stroke-width="3"' + (f' ' if k else ''))
+            if k == 0:
+                self.circle(x + 40, yy + 30, 17, "none", f'stroke="{c["heading"]}" stroke-width="2"')
+        yy += 66
+        for k, t in enumerate(["Show on mobile", "Show after 5 seconds"]):
+            self.toggle(x + 24, yy + k * 36, True)
+            self.text(x + 76, yy + 16 + k * 36, t, 12, c["heading"], 600, spacing=0)
+        yy += 86
+        self.label(x + 24, yy, "Embed code", 12, c["heading"], 700)
+        self.rect(x + 24, yy + 10, fw - 48, 64, "#0f1426", r=10)
+        for k, (wid, col) in enumerate([(0.8, "#7dd3fc"), (0.6, "#c084fc"), (0.4, "#86efac")]):
+            self.rect(x + 40, yy + 26 + k * 14, (fw - 80) * wid, 6, col, r=3)
+        # preview
+        px, pw_ = x + fw + 24, w - fw - 24
+        self.card(px, y, pw_, h, r=14)
+        self.rect(px + 1, y + 1, pw_ - 2, 36, c["surface"], r=14)
+        for k in range(3):
+            self.circle(px + 20 + k * 14, y + 19, 4, ["#ff6159", "#ffbd2e", "#28c941"][k])
+        self.rect(px + 80, y + 12, pw_ - 160, 14, c["card"], r=7)
+        self.rect(px + 30, y + 64, 100, 12, c["muted"], r=6)
+        for k in range(4):
+            self.rect(px + pw_ - 330 + k * 70, y + 66, 50, 8, c["muted"], r=4)
+        self.rect(px + 30, y + 120, pw_ * 0.45, 24, c["heading"], r=7, extra='opacity="0.15"')
+        self.rect(px + 30, y + 154, pw_ * 0.35, 24, c["heading"], r=7, extra='opacity="0.15"')
+        self.lines(px + 30, y + 200, pw_ * 0.4, 3, h=8, gap=16)
+        self.image(px + pw_ * 0.55, y + 110, pw_ * 0.4, 200, r=14, kind="landscape")
+        for k in range(3):
+            self.rect(px + 30 + k * (pw_ - 60) / 3, y + 350, (pw_ - 60) / 3 - 16, 120, c["surface"], r=12)
+        # popup
+        sh = self.shadow()
+        bx, bw_ = px + pw_ - 320, 290
+        byy = y + h - 400
+        self.rect(bx, byy, bw_, 300, c["card"], r=16, extra=sh)
+        self.rect(bx, byy, bw_, 84, mix(c["p"], "#000000", 0.2), r=16)
+        self.rect(bx, byy + 60, bw_, 24, mix(c["p"], "#000000", 0.2))
+        self.avatar(bx + 36, byy + 42, 20, 2)
+        self.text(bx + 66, byy + 38, "Emma from Replyo", 13, "#ffffff", 700, spacing=0)
+        self.text(bx + 66, byy + 56, "Typically replies in minutes", 10, "#ffffffbb", 500, spacing=0)
+        self.chat_bg(bx, byy + 84, bw_, 150)
+        self.bubble(bx + 16, byy + 100, bw_ * 0.75, 2)
+        self.rect(bx + 16, byy + 248, bw_ - 32, 40, c["p"], r=20)
+        self.text(bx + bw_ / 2, byy + 273, "Start Chat", 13, "#ffffff", 700, anchor="middle", spacing=0)
+        self.circle(px + pw_ - 52, y + h - 52, 28, c["p"], sh)
+        self.add(f'<path d="M{px + pw_ - 64} {y + h - 42} l3 -9 a11 11 0 1 1 5 5 z" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/>')
 
 # --------------------------------------------------------------------------- #
 # Screen definitions
@@ -967,6 +1398,7 @@ ADMIN = "#0284c7"
 AI = "#7c3aed"
 POS = "#059669"
 WP = "#e11d48"
+WA = "#0f766e"
 
 
 def admin_dashboard(kind, dark=False, sidebar="light", name="Vantage", primary=ADMIN, seed=1):
@@ -1214,6 +1646,78 @@ def pos_screen(kind, seed):
     return cv
 
 
+def wa_screen(kind, seed):
+    if kind == "login":
+        return auth_page("login", WA, "Replyo", seed)
+    sidebar = {"flow-builder": "none", "admin-dashboard": "dark", "admin-plans": "dark"}.get(kind, "light")
+    cv = AppCanvas(WA, False, "Replyo", seed, sidebar)
+    titles = {"dashboard": "Dashboard", "inbox": "Team Inbox", "flow-builder": None, "campaigns": "Campaigns",
+              "campaign-new": "New Campaign", "templates": "Message Templates", "contacts": "Contacts",
+              "analytics": "Analytics", "auto-replies": "Auto Replies", "widget": "Chat Widget",
+              "admin-dashboard": "SaaS Overview", "admin-plans": "Subscription Plans", "settings": "WhatsApp Cloud API"}
+    cv.shell(titles[kind], active=1 + seed % 7)
+    x, y, w = cv.x0, cv.y, cv.cw
+    if kind == "dashboard":
+        cv.kpis([("Messages Sent", "128,420", "18%", True), ("Delivered", "98.2%", "0.6%", True), ("Read Rate", "86.4%", "3.1%", True), ("Open Chats", "342", "12", False)])
+        x1, w1, x2, w2 = cv.grid2()
+        cv.chart(x1, cv.y, w1, 340, "line2", "Sent vs. Read")
+        cv.chart(x2, cv.y, w2, 340, "donut", "Conversations")
+        cv.y += 364
+        th = cv.table(x1, cv.y, w1, "Recent Campaigns", 5, ("Campaign", "Audience", "Read", "Status"), avatar=False,
+                      status=("Completed", "Running", "Scheduled", "Completed", "Completed"))
+        cv.list_card(x2, cv.y, w2, th, "Top Agents", values=["128", "96", "84", "71", "65"])
+        cv.y += th
+    elif kind == "inbox":
+        cv.inbox(x, y, w, 780)
+        cv.y += 780
+    elif kind == "flow-builder":
+        cv.flow_builder(x, y, w, 800)
+        cv.y += 800
+    elif kind == "campaigns":
+        cv.kpis([("Campaigns", "86", "9", True), ("Messages", "412k", "22%", True), ("Read Rate", "84.9%", "2.4%", True), ("Replies", "38.2k", "11%", True)])
+        cv.y += cv.table(x, cv.y, w, "All Campaigns", 7, ("Campaign", "Template", "Sent", "Read", "Status"), avatar=False, progress=True,
+                         status=("Running", "Completed", "Scheduled", "Completed", "Completed", "Paused", "Completed"))
+    elif kind == "campaign-new":
+        cv.campaign_new(x, y, w, 820)
+        cv.y += 820
+    elif kind == "templates":
+        cv.y += cv.wa_templates(x, y, w)
+    elif kind == "contacts":
+        cv.kpis([("Contacts", "24,816", "1.2k", True), ("Subscribed", "23,940", "4%", True), ("Opted Out", "876", "0.4%", False), ("Segments", "18", "2", True)])
+        cv.y += cv.table(x, cv.y, w, "All Contacts", 8, ("Contact", "Phone", "Tags", "Last Active", "Status"), check=True,
+                         status=("Subscribed", "Subscribed", "Opted out", "Subscribed", "Subscribed", "Subscribed", "Opted out", "Subscribed"))
+    elif kind == "analytics":
+        cv.kpis([("Conversations", "18,240", "14%", True), ("Avg. First Reply", "1m 48s", "22%", True), ("Resolved", "94.1%", "2.0%", True), ("CSAT", "4.8 / 5", "0.2", True)])
+        x1, w1, x2, w2 = cv.grid2(0.6)
+        cv.chart(x1, cv.y, w1, 360, "area", "Conversations Over Time")
+        cv.chart(x2, cv.y, w2, 360, "hbar", "Top Chatbot Flows")
+        cv.y += 384
+        cv.y += cv.table(x, cv.y, w, "Agent Performance", 4, ("Agent", "Chats", "First Reply", "Resolved", "Status"),
+                         status=("Active", "Active", "Paused", "Active"))
+    elif kind == "auto-replies":
+        cv.y += cv.table(x, y, w, "Keyword Rules", 8, ("Keyword", "Match", "Reply", "Triggered", "Status"), avatar=False, check=True,
+                         status=("Active", "Active", "Active", "Paused", "Active", "Active", "Paused", "Active"))
+    elif kind == "widget":
+        cv.widget(x, y, w, 760)
+        cv.y += 760
+    elif kind == "admin-dashboard":
+        cv.kpis([("MRR", "$32,480", "16%", True), ("Workspaces", "1,284", "9%", True), ("Messages Today", "1.2M", "21%", True), ("Churn", "1.8%", "0.3%", True)])
+        x1, w1, x2, w2 = cv.grid2()
+        cv.chart(x1, cv.y, w1, 340, "area", "Revenue")
+        cv.chart(x2, cv.y, w2, 340, "donut", "Plans")
+        cv.y += 364
+        th = cv.table(x1, cv.y, w1, "Latest Subscriptions", 5, ("Workspace", "Plan", "Amount", "Status"),
+                      status=("Paid", "Paid", "Pending", "Paid", "Failed"))
+        cv.list_card(x2, cv.y, w2, th, "Most Active Workspaces", values=["84k", "62k", "51k", "40k", "33k"])
+        cv.y += th
+    elif kind == "admin-plans":
+        cv.y += cv.plans(x, y, w)
+        cv.y += cv.table(x, cv.y, w, "Plan Limits", 4, ("Plan", "Contacts", "Agents", "Flows", "Status"), avatar=False, status=("Active", "Active", "Active", "Draft"))
+    elif kind == "settings":
+        cv.form(x, y, w, 760, "WhatsApp Cloud API", tabs=("WhatsApp API", "Phone Numbers", "Webhooks", "Business Profile", "Team", "Billing"))
+        cv.y += 760
+    return cv
+
 def wp_site(i, name, color, dark, hero, headline, sections):
     cv = Canvas(color, dark, name, seed=200 + i)
     cv.hero(hero, headline)
@@ -1269,6 +1773,11 @@ def generate(root):
     for i, kind in enumerate(["dashboard", "terminal", "products", "add-product", "purchase", "inventory",
                               "reports", "barcodes", "customers", "roles", "settings", "login"]):
         save(pos_screen(kind, 400 + i), "pos", kind); n += 1
+
+    # WhatsApp automation script
+    for i, kind in enumerate(["dashboard", "inbox", "flow-builder", "campaigns", "campaign-new", "templates", "contacts",
+                              "analytics", "auto-replies", "widget", "admin-dashboard", "admin-plans", "settings", "login"]):
+        save(wa_screen(kind, 600 + i), "wa", kind); n += 1
 
     # WordPress theme
     for i, (fname, name, color, dark, hero, headline, sections) in enumerate(WP_SITES):

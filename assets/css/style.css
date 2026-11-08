@@ -608,6 +608,12 @@ a:focus-visible .shot img,
 .theme-pos { --primary: #059669; --primary-600: #047857; --primary-50: #e2f6ee; --primary-rgb: 5 150 105; --primary-light: #6ee7b7;
   --grad: linear-gradient(120deg, #34d399 0%, #059669 45%, #0ea5e9 100%); --glow-1: #059669; --glow-2: #0ea5e9; --glow-3: #10b981; }
 
+.theme-wa { --primary: #0f766e; --primary-600: #115e59; --primary-50: #e0f4f1; --primary-rgb: 15 118 110; --primary-light: #5eead4;
+  --grad: linear-gradient(120deg, #2dd4bf 0%, #0f766e 45%, #22c55e 100%); --glow-1: #0d9488; --glow-2: #22c55e; --glow-3: #14b8a6; }
+
+/* Trademark / affiliation note in the footer */
+.footer__note { margin: 20px 0 0; font-size: 0.8rem; color: #6f7593; }
+
 /* Framework versions (admin) */
 .framework-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
 .framework { text-align: center; padding: 28px 16px 24px; border-radius: var(--radius); background: #fff; border: 1px solid var(--border); transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease); }

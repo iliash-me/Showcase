@@ -1,6 +1,6 @@
 # Marketplace Item Showcase Pages
 
-Landing pages for presenting items on ThemeForest and CodeCanyon (or any marketplace): the "live preview" page that shows buyers every demo, screen and feature at a glance. Five variations share one stylesheet and one script:
+Landing pages for presenting items on ThemeForest and CodeCanyon (or any marketplace): the "live preview" page that shows buyers every demo, screen and feature at a glance. Six variations share one stylesheet and one script:
 
 | File | For | Product (sample) | Theme |
 | --- | --- | --- | --- |
@@ -9,6 +9,7 @@ Landing pages for presenting items on ThemeForest and CodeCanyon (or any marketp
 | `wordpress-theme.html` | ThemeForest: WordPress theme | Aurelia | Rose (`.theme-wp`) |
 | `php-ai-saas.html` | CodeCanyon: PHP/Laravel AI content SaaS script | Quillo | Violet (`.theme-ai`) |
 | `php-pos-inventory.html` | CodeCanyon: PHP/Laravel POS & inventory script | Stockly | Emerald (`.theme-pos`) |
+| `php-whatsapp-automation.html` | CodeCanyon: PHP/Laravel WhatsApp marketing & automation script | Replyo | Teal (`.theme-wa`) |
 
 - **No build step.** Plain HTML, CSS and vanilla JS. Open any `.html` file or deploy the folder anywhere.
 - **No dependencies.** The only external request is Google Fonts.
@@ -27,11 +28,13 @@ All pages share: sticky header, hero with stats and a 3-browser showcase, tech/p
 | WordPress theme | Filterable starter sites, 3-step one-click demo import with importer screenshot, Elementor builder and WooCommerce spotlights, PageSpeed scores |
 | AI SaaS script | **Live demo logins** with copy buttons (landing, user, admin), screens filtered by Frontend / User / Admin, AI-tools and monetization spotlights, AI provider and payment gateway integrations, server requirements and installation, **Regular vs Extended license** comparison |
 | POS script | Role-based demo logins (admin, manager, cashier), modules grid, filterable screens, supported hardware, **roles & permissions matrix**, requirements, license comparison |
+| WhatsApp script | Demo logins (SaaS admin, business, agent), 3-step "how it works", filterable screens (inbox, chatbot flow builder, campaign builder with phone preview, templates, widget), chatbot / inbox / campaign spotlights, app and payment integrations, requirements, license comparison, Meta trademark note in the footer |
 
 ## Project structure
 
 ```
-index.html  admin-dashboard.html  wordpress-theme.html  php-ai-saas.html  php-pos-inventory.html
+index.html  admin-dashboard.html  wordpress-theme.html
+php-ai-saas.html  php-pos-inventory.html  php-whatsapp-automation.html
 assets/
   css/style.css          # all styles; design tokens in :root, per-page themes in section 16
   js/main.js             # nav, filters, reveal, counters, score rings, copy buttons, customizer, switcher
@@ -40,7 +43,7 @@ assets/
     demos/  pages/       # HTML template previews (placeholders)
     admin/               # admin dashboards, layout variants and app screens
     wp/                  # WordPress starter sites, importer and page builder
-    ai/  pos/            # PHP script screens
+    ai/  pos/  wa/       # PHP script screens
 tools/
   generate_thumbnails.py # regenerates every placeholder preview
   app_screens.py         # app/admin screen drawing (used by the script above)
@@ -51,17 +54,17 @@ tools/
 ### 1. Name, price and links
 Search the page you're using and replace:
 
-- The product name (`Nexora`, `Vantage`, `Aurelia`, `Quillo` or `Stockly`) and the logo letter in the header and footer SVG
+- The product name (`Nexora`, `Vantage`, `Aurelia`, `Quillo`, `Stockly` or `Replyo`) and the logo letter in the header and footer SVG
 - Prices (`$19`, `$29`, `$59`, `$69`, `$49` and the license prices)
 - `https://themeforest.net/` / `https://codecanyon.net/`: your item URL
 - `demo/...` links and `https://demo.example.com/...`: your live demo URLs
 - Demo credentials (`admin@example.com` / `demo1234`, etc.) in the live demo cards
 - `support@example.com`, social links (`href="#"`), "Your Studio"
 
-The stats, ratings, reviews, changelog entries, performance scores and license terms are **sample content**. Replace them with your item's real details before publishing, and check license wording against the marketplace's official terms.
+The stats, ratings, reviews, changelog entries, performance scores and license terms are **sample content**. Replace them with your item's real details before publishing, and check license wording against the marketplace's official terms. If your product integrates a third-party service (like WhatsApp), keep a trademark/non-affiliation note and don't use that brand's logo; the WhatsApp page shows one way to do it.
 
 ### 2. Brand colors and font
-Each page sets its colors with a class on `<body>` (`theme-admin`, `theme-wp`, `theme-ai`, `theme-pos`; no class means the default indigo). Edit that theme in section 16 of `assets/css/style.css`, or add your own:
+Each page sets its colors with a class on `<body>` (`theme-admin`, `theme-wp`, `theme-ai`, `theme-pos`, `theme-wa`; no class means the default indigo). Edit that theme in section 16 of `assets/css/style.css`, or add your own:
 
 ```css
 .theme-mine {
