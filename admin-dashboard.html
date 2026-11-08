@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vantage — Admin Dashboard Template & UI Kit</title>
+  <meta name="description" content="Vantage is a developer-first admin dashboard template with 8 dashboards, 10 apps, 120+ pages and 500+ components in HTML, React, Next.js, Vue, Angular and Laravel.">
+  <meta name="theme-color" content="#0a0c1d">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Vantage — Admin Dashboard Template & UI Kit">
+  <meta property="og:description" content="Vantage is a developer-first admin dashboard template with 8 dashboards, 10 apps, 120+ pages and 500+ components in HTML, React, Next.js, Vue, Angular and Laravel.">
+  <meta property="og:image" content="assets/img/admin/layout-light.svg">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="theme-admin">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Icon sprite ========================================================= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/></symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></symbol>
+      <symbol id="i-dash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h12"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+      <symbol id="i-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+      <symbol id="f-responsive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="11" rx="2"/><rect x="17" y="8" width="5" height="12" rx="1.5"/><path d="M6 19h6"/></symbol>
+      <symbol id="f-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></symbol>
+      <symbol id="f-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+      <symbol id="f-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+      <symbol id="f-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+      <symbol id="f-type" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></symbol>
+      <symbol id="f-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol>
+      <symbol id="f-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></symbol>
+      <symbol id="f-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+      <symbol id="f-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8"/><path d="M21 3v5h-5"/></symbol>
+      <symbol id="f-support" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.9 4.9 4.3 4.3M14.8 14.8l4.3 4.3M14.8 9.2l4.3-4.3M4.9 19.1l4.3-4.3"/></symbol>
+      <symbol id="f-a11y" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.5"/><path d="M5 8l7 1.5L19 8M12 9.5V14m0 0-3 7m3-7 3 7"/></symbol>
+      <symbol id="f-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"/></symbol>
+      <symbol id="f-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1"/><circle cx="17.5" cy="10.5" r="1"/><circle cx="8.5" cy="7.5" r="1"/><circle cx="6.5" cy="12.5" r="1"/><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.3A5.7 5.7 0 0 0 22 9.8C22 5.5 17.5 2 12 2z"/></symbol>
+      <symbol id="f-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></symbol>
+      <symbol id="f-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+      <symbol id="f-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></symbol>
+      <symbol id="f-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="f-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></symbol>
+      <symbol id="f-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></symbol>
+      <symbol id="f-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8z"/><path d="m3 8 9 5 9-5M12 13v8"/></symbol>
+      <symbol id="f-barcode" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5v14M6 5v14M10 5v14M13 5v14M17 5v14M21 5v14"/></symbol>
+      <symbol id="f-printer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/></symbol>
+      <symbol id="f-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol>
+      <symbol id="f-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H5a2 2 0 0 1 0-4h13v4"/><path d="M3 5v14a2 2 0 0 0 2 2h15V7"/><circle cx="16" cy="14" r="1.5"/></symbol>
+      <symbol id="f-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.3-9.3M16 7l3 3M14 9l2 2"/></symbol>
+      <symbol id="f-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></symbol>
+      <symbol id="f-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/></symbol>
+      <symbol id="f-store" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v9h14v-9M10 21v-5h4v5"/></symbol>
+      <symbol id="f-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6"/><path d="M6 8h12v4a6 6 0 0 1-12 0V8z"/><path d="M12 18v4"/></symbol>
+      <symbol id="f-move" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><path d="m9 5 3-3 3 3M9 19l3 3 3-3M5 9l-3 3 3 3M19 9l3 3-3 3"/></symbol>
+      <symbol id="f-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 21h16"/></symbol>
+      <symbol id="f-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></symbol>
+      <symbol id="f-layout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></symbol>
+      <symbol id="f-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4h14v11H1z"/><path d="M15 8h4l3 3v4h-7"/><circle cx="5.5" cy="18" r="2"/><circle cx="18.5" cy="18" r="2"/></symbol>
+      <symbol id="f-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+      <symbol id="f-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+      <symbol id="f-receipt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h14v20l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h4"/></symbol>
+      <symbol id="f-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+      <symbol id="f-scan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V3h4M17 3h4v4M21 17v4h-4M7 21H3v-4"/><path d="M7 12h10"/></symbol>
+      <symbol id="f-swap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></symbol>
+      <symbol id="f-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></symbol>
+      <symbol id="s-x" viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.2-8.3L2 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></symbol>
+      <symbol id="s-dribbble" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.6 2.6C13 8 15.2 13.8 16 21.1M2.1 10.7c5.3.3 11.5-.9 16.9-4.9M5.3 19.4c3.3-4.6 8.7-6.6 16.5-5.2"/></symbol>
+      <symbol id="s-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.7 9.7 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></symbol>
+      <symbol id="s-youtube" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15.1V8.9l5.8 3.1-5.8 3.1z"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Header ============================================================== -->
+  <header class="header">
+    <div class="container">
+      <a class="logo" href="#top" aria-label="Vantage home">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg-logo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#6366f1"/></linearGradient></defs><rect width="40" height="40" rx="11" fill="url(#lg-logo)"/><text x="20" y="27.5" text-anchor="middle" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="20" font-weight="800" fill="#fff">V</text></svg>
+        Vantage <small>v3.2</small>
+      </a>
+
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#dashboards">Dashboards</a></li>
+          <li><a href="#frameworks">Frameworks</a></li>
+          <li><a href="#customizer">Customizer</a></li>
+          <li><a href="#apps">Apps</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li class="nav__buy"><a class="btn" href="https://themeforest.net/" target="_blank" rel="noopener">Buy Vantage — $29</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__cta">
+        <a class="btn btn--sm" href="https://themeforest.net/" target="_blank" rel="noopener">
+          <svg aria-hidden="true"><use href="#i-cart"/></svg> Buy Now
+        </a>
+        <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero ============================================================== -->
+    <section class="hero" id="top">
+      <span class="hero__glow hero__glow--1"></span>
+      <span class="hero__glow hero__glow--2"></span>
+      <span class="hero__glow hero__glow--3"></span>
+
+      <div class="container">
+        <div class="hero__content">
+          <a class="hero__badge" href="#changelog"><b>NEW</b> Version 3.2 — Laravel &amp; Next.js versions added</a>
+          <h1>The admin dashboard <span class="text-grad">your next app deserves</span></h1>
+          <p class="hero__lead"><strong>Vantage</strong> is a developer-first admin template &amp; UI kit with <strong>8 ready-made dashboards</strong>, 10 apps, 120+ pages and 500+ components — available in HTML, React, Next.js, Vue, Angular and Laravel.</p>
+          <div class="hero__actions">
+            <a class="btn" href="#dashboards">Explore Dashboards <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn--ghost" href="https://themeforest.net/" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-cart"/></svg> Buy Now <span class="price">$29</span>
+            </a>
+          </div>
+          <div class="hero__trust">
+            <span>
+              <span class="stars" aria-hidden="true"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+              <span><strong>4.9/5</strong> average rating</span>
+            </span>
+            <i class="dot-sep" aria-hidden="true"></i>
+            <span><strong>3,100+</strong> developers</span>
+            <i class="dot-sep" aria-hidden="true"></i>
+            <span>6 frameworks, one license</span>
+          </div>
+        </div>
+
+        <div class="hero__stats" data-reveal>
+          <div><strong data-count="8" data-suffix="">8</strong><span>Dashboards</span></div>
+          <div><strong data-count="120" data-suffix="+">120+</strong><span>Pages</span></div>
+          <div><strong data-count="500" data-suffix="+">500+</strong><span>Components</span></div>
+          <div><strong data-count="6" data-suffix="">6</strong><span>Frameworks</span></div>
+        </div>
+
+        <div class="hero__showcase" aria-hidden="true">
+          <div class="browser browser--left">
+            <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url"></span></div>
+            <div class="shot"><img src="assets/img/admin/dash-crm.svg" alt="" width="1200" height="1092"></div>
+          </div>
+          <div class="browser">
+            <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url"></span></div>
+            <div class="shot"><img src="assets/img/admin/layout-light.svg" alt="" width="1200" height="1092" fetchpriority="high"></div>
+          </div>
+          <div class="browser browser--right">
+            <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url"></span></div>
+            <div class="shot"><img src="assets/img/admin/dash-ecommerce.svg" alt="" width="1200" height="1092"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech stack ======================================================== -->
+    <section class="tech" aria-label="Built with a modern, developer-friendly stack">
+      <div class="container">
+        <p class="tech__label">Built with a modern, developer-friendly stack</p>
+        <ul class="tech__list">
+          <li><i style="--c:#7952b3">B</i>Bootstrap 5</li>
+          <li><i style="--c:#cd6799">S</i>SCSS</li>
+          <li><i style="--c:#3178c6">TS</i>TypeScript</li>
+          <li><i style="--c:#646cff">V</i>Vite</li>
+          <li><i style="--c:#ff4560">A</i>ApexCharts</li>
+          <li><i style="--c:#a259ff">F</i>Figma Included</li>
+          <li><i style="--c:#12b981">W</i>WCAG 2.1 AA</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Frameworks ======================================================== -->
+    <section class="section section--soft" id="frameworks">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Frameworks</span>
+          <h2>One purchase, six frameworks</h2>
+          <p>Use the stack your team already loves. Every version shares the same design, components and documentation.</p>
+        </div>
+
+        <div class="framework-grid">
+          <div class="framework" data-reveal>
+            <span class="framework__logo" style="--c:#e34f26">5</span>
+            <h3>HTML5</h3>
+            <span class="framework__meta">Bootstrap 5 · Vite</span>
+            <span class="status-ok">Included</span>
+          </div>
+          <div class="framework" data-reveal style="--delay:0.05s">
+            <span class="framework__logo" style="--c:#149eca">Re</span>
+            <h3>React</h3>
+            <span class="framework__meta">TypeScript · Vite</span>
+            <span class="status-ok">Included</span>
+          </div>
+          <div class="framework" data-reveal style="--delay:0.10s">
+            <span class="framework__logo" style="--c:#111111">N</span>
+            <h3>Next.js</h3>
+            <span class="framework__meta">App Router · TS</span>
+            <span class="status-ok">Included</span>
+          </div>
+          <div class="framework" data-reveal style="--delay:0.15s">
+            <span class="framework__logo" style="--c:#42b883">V</span>
+            <h3>Vue 3</h3>
+            <span class="framework__meta">Composition API</span>
+            <span class="status-ok">Included</span>
+          </div>
+          <div class="framework" data-reveal style="--delay:0.20s">
+            <span class="framework__logo" style="--c:#dd0031">A</span>
+            <h3>Angular</h3>
+            <span class="framework__meta">Standalone components</span>
+            <span class="status-ok">Included</span>
+          </div>
+          <div class="framework" data-reveal style="--delay:0.25s">
+            <span class="framework__logo" style="--c:#f9322c">L</span>
+            <h3>Laravel</h3>
+            <span class="framework__meta">Blade · Auth ready</span>
+            <span class="status-ok">Included</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboards ======================================================== -->
+    <section class="section" id="dashboards">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Dashboards</span>
+          <h2>8 dashboards for every kind of product</h2>
+          <p>Analytics, sales, finance or operations — start from a dashboard that already fits your data.</p>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter by category" data-reveal>
+          <button class="filter-btn is-active" type="button" data-filter="all" aria-pressed="true">All <small>0</small></button>
+          <button class="filter-btn" type="button" data-filter="business" aria-pressed="false">Business <small>0</small></button>
+          <button class="filter-btn" type="button" data-filter="sales" aria-pressed="false">Sales <small>0</small></button>
+          <button class="filter-btn" type="button" data-filter="management" aria-pressed="false">Management <small>0</small></button>
+        </div>
+
+        <div class="demo-grid">
+          <article class="demo-card" data-category="business" data-reveal>
+            <a class="demo-card__link" href="demo/dashboard-analytics.html" target="_blank" rel="noopener" aria-label="Live Preview: Analytics">
+              <span class="badge badge--hot">Popular</span>
+              <div class="shot"><img src="assets/img/admin/dash-analytics.svg" alt="Analytics screen" width="1200" height="1092" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/dashboard-analytics.html" target="_blank" rel="noopener">Analytics</a></h3><span>Analytics</span></div>
+          </article>
+          <article class="demo-card" data-category="sales" data-reveal style="--delay:0.08s">
+            <a class="demo-card__link" href="demo/dashboard-ecommerce.html" target="_blank" rel="noopener" aria-label="Live Preview: eCommerce">
+              <div class="shot"><img src="assets/img/admin/dash-ecommerce.svg" alt="eCommerce screen" width="1200" height="1092" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/dashboard-ecommerce.html" target="_blank" rel="noopener">eCommerce</a></h3><span>Sales</span></div>
+          </article>
+          <article class="demo-card" data-category="sales" data-reveal style="--delay:0.16s">
+            <a class="demo-card__link" href="demo/dashboard-crm.html" target="_blank" rel="noopener" aria-label="Live Preview: CRM">
+              <div class="shot"><img src="assets/img/admin/dash-crm.svg" alt="CRM screen" width="1200" height="1092" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/dashboard-crm.html" target="_blank" rel="noopener">CRM</a></h3><span>Sales</span></div>
+          </article>
+          <article class="demo-card" data-category="management" data-reveal>
+            <a class="demo-card__link" href="demo/dashboard-project.html" target="_blank" rel="noopener" aria-label="Live Preview: Project Management">
+              <span class="badge badge--dark">Horizontal</span>
+              <div class="shot"><img src="assets/img/admin/dash-project.svg" alt="Project Management screen" width="1200" height="1144" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/dashboard-project.html" target="_blank" rel="noopener">Project Management</a></h3><span>Management</span></div>
+          </article>
+          <article class="demo-card" data-category="business" data-reveal style="--delay:0.08s">
+            <a class="demo-card__link" href="demo/dashboard-finance.html" target="_blank" rel="noopener" aria-label="Live Preview: Finance &amp; Banking">
+              <span class="badge badge--dark">Dark</span>
+              <div class="shot"><img src="assets/img/admin/dash-finance.svg" alt="Finance &amp; Banking screen" width="1200" height="1092" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/dashboard-finance.html" target="_blank" rel="noopener">Finance &amp; Banking</a></h3><span>Finance</span></div>
+          </article>
+          <article class="demo-card" data-category="business sales" data-reveal style="--delay:0.16s">
+            <a class="demo-card__link" href="demo/dashboard-saas.html" target="_blank" rel="noopener" aria-label="Live Preview: SaaS Metrics">
+              <span class="badge">New</span>
+              <div class="shot"><img src="assets/img/admin/dash-saas.svg" alt="SaaS Metrics screen" width="1200" height="1092" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/dashboard-saas.html" target="_blank" rel="noopener">SaaS Metrics</a></h3><span>SaaS</span></div>
+          </article>
+          <article class="demo-card" data-category="management" data-reveal>
+            <a class="demo-card__link" href="demo/dashboard-hrm.html" target="_blank" rel="noopener" aria-label="Live Preview: HR Management">
+              <span class="badge">New</span>
+              <div class="shot"><img src="assets/img/admin/dash-hrm.svg" alt="HR Management screen" width="1200" height="1092" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/dashboard-hrm.html" target="_blank" rel="noopener">HR Management</a></h3><span>HRM</span></div>
+          </article>
+          <article class="demo-card" data-category="management" data-reveal style="--delay:0.08s">
+            <a class="demo-card__link" href="demo/dashboard-logistics.html" target="_blank" rel="noopener" aria-label="Live Preview: Logistics">
+              <span class="badge">New</span>
+              <div class="shot"><img src="assets/img/admin/dash-logistics.svg" alt="Logistics screen" width="1200" height="1092" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">Live Preview <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="demo/dashboard-logistics.html" target="_blank" rel="noopener">Logistics</a></h3><span>Logistics</span></div>
+          </article>
+          <article class="demo-card demo-card--soon" data-reveal>
+            <a class="demo-card__link" href="#faq">
+              <div>
+                <span class="plus"><svg aria-hidden="true"><use href="#i-plus"/></svg></span>
+                <h3>More dashboards on the way</h3>
+                <p>New dashboards ship with every update — free for existing customers.</p>
+                <span class="link">Request a dashboard →</span>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customizer ======================================================== -->
+    <section class="section section--soft" id="customizer">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Live Customizer</span>
+          <h2>Make it yours in seconds</h2>
+          <p>Switch theme modes, navigation layouts and brand colors — try it right here. Every option is also built into the template.</p>
+        </div>
+
+        <div class="customizer" data-customizer>
+          <div class="customizer__panel" data-reveal>
+            <div class="opt-group">
+              <h3>Theme &amp; layout</h3>
+              <div class="opt-list">
+                <button class="opt-btn is-active" type="button" data-src="assets/img/admin/layout-light.svg" aria-pressed="true"><span class="mini mini--light"><i></i><i></i></span>Light</button>
+                <button class="opt-btn" type="button" data-src="assets/img/admin/layout-dark.svg" aria-pressed="false"><span class="mini mini--dark"><i></i><i></i></span>Dark</button>
+                <button class="opt-btn" type="button" data-src="assets/img/admin/layout-semi-dark.svg" aria-pressed="false"><span class="mini mini--semi"><i></i><i></i></span>Semi Dark</button>
+                <button class="opt-btn" type="button" data-src="assets/img/admin/layout-horizontal.svg" aria-pressed="false"><span class="mini mini--horizontal"><i></i><i></i></span>Horizontal</button>
+              </div>
+            </div>
+            <div class="opt-group">
+              <h3>Primary color</h3>
+              <div class="swatches">
+                <button class="swatch is-active" type="button" style="--c:#0284c7" data-hue="0" aria-label="Sky" aria-pressed="true"></button>
+                <button class="swatch" type="button" style="--c:#7c3aed" data-hue="60" aria-label="Violet" aria-pressed="false"></button>
+                <button class="swatch" type="button" style="--c:#e11d48" data-hue="140" aria-label="Rose" aria-pressed="false"></button>
+                <button class="swatch" type="button" style="--c:#ea7a0c" data-hue="-170" aria-label="Amber" aria-pressed="false"></button>
+                <button class="swatch" type="button" style="--c:#059669" data-hue="-60" aria-label="Emerald" aria-pressed="false"></button>
+              </div>
+            </div>
+            <p class="customizer__note">Preferences are saved per user and can be locked by admins.</p>
+          </div>
+          <div class="customizer__preview" data-reveal style="--delay:.1s">
+            <div class="browser">
+              <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url"></span></div>
+              <div class="shot"><img src="assets/img/admin/layout-light.svg" alt="Dashboard preview" width="1200" height="1092" loading="lazy" data-customizer-target></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apps ============================================================== -->
+    <section class="section" id="apps">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Apps &amp; Pages</span>
+          <h2>10 ready-to-use apps &amp; 120+ pages</h2>
+          <p>Fully working UI for the screens every product needs — wire them to your API and ship.</p>
+        </div>
+
+        <div class="page-grid page-grid--wide">
+          <article class="page-card" data-reveal>
+            <a href="demo/app-chat.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot"><img src="assets/img/admin/app-chat.svg" alt="Chat page" width="1200" height="892" loading="lazy"></div></div>
+              <h3>Chat</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.06s">
+            <a href="demo/app-email.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot"><img src="assets/img/admin/app-email.svg" alt="Email page" width="1200" height="892" loading="lazy"></div></div>
+              <h3>Email</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.12s">
+            <a href="demo/app-calendar.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot"><img src="assets/img/admin/app-calendar.svg" alt="Calendar page" width="1200" height="892" loading="lazy"></div></div>
+              <h3>Calendar</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal>
+            <a href="demo/app-kanban.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot"><img src="assets/img/admin/app-kanban.svg" alt="Kanban Board page" width="1200" height="892" loading="lazy"></div></div>
+              <h3>Kanban Board</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.06s">
+            <a href="demo/app-file-manager.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot"><img src="assets/img/admin/app-file-manager.svg" alt="File Manager page" width="1200" height="790" loading="lazy"></div></div>
+              <h3>File Manager</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.12s">
+            <a href="demo/app-invoice.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot"><img src="assets/img/admin/app-invoice.svg" alt="Invoice page" width="1200" height="932" loading="lazy"></div></div>
+              <h3>Invoice</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal>
+            <a href="demo/app-users.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot"><img src="assets/img/admin/app-users.svg" alt="User List page" width="1200" height="876" loading="lazy"></div></div>
+              <h3>User List</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.06s">
+            <a href="demo/app-profile.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot"><img src="assets/img/admin/app-profile.svg" alt="User Profile page" width="1200" height="896" loading="lazy"></div></div>
+              <h3>User Profile</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.12s">
+            <a href="demo/app-pricing.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot"><img src="assets/img/admin/app-pricing.svg" alt="Pricing page" width="1200" height="928" loading="lazy"></div></div>
+              <h3>Pricing</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal>
+            <a href="demo/app-settings.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot"><img src="assets/img/admin/app-settings.svg" alt="Settings page" width="1200" height="932" loading="lazy"></div></div>
+              <h3>Settings</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.06s">
+            <a href="demo/app-login.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot"><img src="assets/img/admin/app-login.svg" alt="Login page" width="800" height="1100" loading="lazy"></div></div>
+              <h3>Login</h3>
+            </a>
+          </article>
+          <article class="page-card" data-reveal style="--delay:0.12s">
+            <a href="demo/app-404.html" target="_blank" rel="noopener">
+              <div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="shot"><img src="assets/img/admin/app-404.svg" alt="404 Error page" width="800" height="1070" loading="lazy"></div></div>
+              <h3>404 Error</h3>
+            </a>
+          </article>
+        </div>
+
+        <div class="page-extras" data-reveal>
+          <p>Plus 500+ components, including:</p>
+          <ul class="chip-list">
+            <li>Data Tables</li><li>Form Wizards</li><li>Validation</li><li>Rich Text Editors</li><li>File Uploads</li><li>Charts</li>
+            <li>Maps</li><li>2,000+ Icons</li><li>Notifications</li><li>Timelines</li><li>Auth Pages (8 variants)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Developer experience ============================================== -->
+    <section class="section section--soft" id="developers">
+      <div class="container">
+        <div class="spot">
+          <div class="spot__media" data-reveal>
+            <div class="terminal"><span class="c"># Pick your flavour and start developing</span>&#10;<span class="p">$</span> cd vantage/react&#10;<span class="p">$</span> npm install&#10;<span class="p">$</span> npm run dev&#10;&#10;<span class="ok">  ➜  Local:   http://localhost:5173/</span>&#10;<span class="c">  ready in 412 ms</span></div>
+          </div>
+          <div class="spot__body" data-reveal style="--delay:.1s">
+            <span class="eyebrow">Developer Experience</span>
+            <h2>Clean code you'll enjoy working with</h2>
+            <p>Typed, linted and modular — every component is documented and easy to extend, so you spend time on features instead of fighting the template.</p>
+            <ul class="check-list">
+              <li>TypeScript-first, with strict types throughout</li>
+              <li>ESLint + Prettier configured out of the box</li>
+              <li>Modular SCSS with design tokens</li>
+              <li>No jQuery — lightweight and fast</li>
+            </ul>
+            <a class="btn btn--outline" href="#faq">Read the docs <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features ========================================================== -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Core Features</span>
+          <h2>Everything you need to build faster</h2>
+          <p>Thoughtfully engineered for developers, delightful for end users.</p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature" data-reveal><span class="feature__icon"><svg aria-hidden="true"><use href="#i-moon"/></svg></span><h3>Light, Dark &amp; Semi-dark</h3><p>Three theme modes with system preference detection.</p></div>
+          <div class="feature" data-reveal style="--delay:0.05s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-layout"/></svg></span><h3>Flexible Layouts</h3><p>Vertical, horizontal, collapsed and boxed navigation.</p></div>
+          <div class="feature" data-reveal style="--delay:0.10s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-globe"/></svg></span><h3>RTL &amp; i18n Ready</h3><p>Right-to-left support and translation-ready strings.</p></div>
+          <div class="feature" data-reveal style="--delay:0.15s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-responsive"/></svg></span><h3>Fully Responsive</h3><p>Every screen works beautifully on phones and tablets.</p></div>
+          <div class="feature" data-reveal><span class="feature__icon"><svg aria-hidden="true"><use href="#f-chart"/></svg></span><h3>Interactive Charts</h3><p>Dozens of chart types powered by ApexCharts.</p></div>
+          <div class="feature" data-reveal style="--delay:0.05s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-layers"/></svg></span><h3>500+ Components</h3><p>Buttons to complex widgets — all consistently styled.</p></div>
+          <div class="feature" data-reveal style="--delay:0.10s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-database"/></svg></span><h3>Advanced Tables</h3><p>Sorting, filtering, pagination and CSV/Excel export.</p></div>
+          <div class="feature" data-reveal style="--delay:0.15s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-shield"/></svg></span><h3>Auth Pages</h3><p>Login, register, 2FA, lock screen and password reset.</p></div>
+          <div class="feature" data-reveal><span class="feature__icon"><svg aria-hidden="true"><use href="#f-palette"/></svg></span><h3>Easy Theming</h3><p>Change brand colors and fonts from one config file.</p></div>
+          <div class="feature" data-reveal style="--delay:0.05s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-image"/></svg></span><h3>Figma File</h3><p>Organized Figma source with components &amp; variables.</p></div>
+          <div class="feature" data-reveal style="--delay:0.10s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-refresh"/></svg></span><h3>Lifetime Updates</h3><p>New dashboards, apps and framework upgrades — free.</p></div>
+          <div class="feature" data-reveal style="--delay:0.15s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-support"/></svg></span><h3>Premium Support</h3><p>Fast, friendly help from the developers who built it.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews =========================================================== -->
+    <section class="section section--soft" id="reviews">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Customer Reviews</span>
+          <h2>Trusted by developers worldwide</h2>
+          <p>Here's what our customers have to say about Vantage.</p>
+        </div>
+
+        <div class="rating-summary" data-reveal>
+          <strong>4.9</strong>
+          <div>
+            <span class="stars" aria-label="Rated 4.9 out of 5"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+            <small>Based on 520+ ratings</small>
+          </div>
+        </div>
+
+        <div class="review-grid">
+          <figure class="review" data-reveal>
+            <div class="review__top">
+              <span class="stars" aria-label="5 out of 5"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+              <span class="review__tag">Code Quality</span>
+            </div>
+            <blockquote>“The React version is the cleanest admin template I've used. Typed components, no hacks, and the folder structure just makes sense.”</blockquote>
+            <figcaption class="review__author"><span class="avatar" style="--c:#0284c7">DK</span><div><b>dkowalski</b><span>Senior frontend engineer</span></div></figcaption>
+          </figure>
+          <figure class="review" data-reveal style="--delay:0.08s">
+            <div class="review__top">
+              <span class="stars" aria-label="5 out of 5"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+              <span class="review__tag">Design Quality</span>
+            </div>
+            <blockquote>“We replaced our in-house dashboard with Vantage in a week. Our customers immediately noticed how much more polished the product felt.”</blockquote>
+            <figcaption class="review__author"><span class="avatar" style="--c:#6366f1">LN</span><div><b>lena_builds</b><span>SaaS founder</span></div></figcaption>
+          </figure>
+          <figure class="review" data-reveal style="--delay:0.16s">
+            <div class="review__top">
+              <span class="stars" aria-label="5 out of 5"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+              <span class="review__tag">Flexibility</span>
+            </div>
+            <blockquote>“Having HTML, Vue and Laravel versions in one purchase saved us on three client projects already. Fantastic value.”</blockquote>
+            <figcaption class="review__author"><span class="avatar" style="--c:#12b981">TO</span><div><b>torres.dev</b><span>Agency lead developer</span></div></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Changelog ========================================================= -->
+    <section class="section" id="changelog">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Changelog</span>
+          <h2>Actively maintained &amp; regularly updated</h2>
+          <p>Framework upgrades and new screens every month — always free for existing customers.</p>
+        </div>
+
+        <div class="changelog">
+          <div class="release" data-reveal>
+            <div class="release__head"><h3>Version 3.2</h3><time datetime="2026-10-20">October 20, 2026</time><span class="release__latest">Latest</span></div>
+            <ul>
+              <li><span class="tag tag--new">New</span>Laravel (Blade) and Next.js App Router versions</li>
+              <li><span class="tag tag--new">New</span>Logistics and HR Management dashboards</li>
+              <li><span class="tag tag--improved">Improved</span>Faster builds with the latest Vite release</li>
+              <li><span class="tag tag--fixed">Fixed</span>Sidebar collapse state in RTL mode</li>
+            </ul>
+          </div>
+          <div class="release" data-reveal>
+            <div class="release__head"><h3>Version 3.1</h3><time datetime="2026-07-08">July 8, 2026</time></div>
+            <ul>
+              <li><span class="tag tag--new">New</span>Kanban board and File Manager apps</li>
+              <li><span class="tag tag--improved">Improved</span>Data tables now support column pinning</li>
+              <li><span class="tag tag--fixed">Fixed</span>Chart tooltips overflowing on small screens</li>
+            </ul>
+          </div>
+          <details>
+            <summary class="btn btn--outline btn--sm">Show older releases</summary>
+  <div class="release">
+    <div class="release__head"><h3>Version 3.0</h3><time datetime="2026-03-15">March 15, 2026</time></div>
+    <ul>
+      <li><span class="tag tag--new">New</span>Complete redesign with semi-dark mode</li>
+      <li><span class="tag tag--new">New</span>Figma file rebuilt with variables</li>
+      <li><span class="tag tag--improved">Improved</span>All versions migrated to TypeScript</li>
+    </ul>
+  </div>
+  <div class="release">
+    <div class="release__head"><h3>Version 2.0</h3><time datetime="2025-09-02">September 2, 2025</time></div>
+    <ul>
+      <li><span class="tag tag--new">New</span>Vue 3 and Angular versions</li>
+    </ul>
+  </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ =============================================================== -->
+    <section class="section section--soft" id="faq">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">FAQ</span>
+          <h2>Frequently asked questions</h2>
+          <p>Can't find what you're looking for? Our support team is happy to help.</p>
+        </div>
+
+        <div class="faq-grid">
+          <div>
+            <details class="faq" open>
+              <summary>Which frameworks are included?</summary>
+              <p>Every purchase includes HTML (Bootstrap 5), React, Next.js, Vue 3, Angular and Laravel versions, plus the Figma design file.</p>
+            </details>
+            <details class="faq">
+              <summary>Does it include a backend or API?</summary>
+              <p>Vantage is a front-end template. The Laravel version includes authentication scaffolding and example controllers so you can connect your own data quickly.</p>
+            </details>
+            <details class="faq">
+              <summary>Can I use it for a SaaS product?</summary>
+              <p>Yes. If your end users pay to use the product (for example a subscription SaaS), you'll need an Extended License. Internal tools and client projects are covered by a Regular License.</p>
+            </details>
+          </div>
+          <div>
+            <details class="faq">
+              <summary>Is the Figma file included?</summary>
+              <p>Yes — the full Figma source with components, variants and color variables is included with every license.</p>
+            </details>
+            <details class="faq">
+              <summary>Are updates free?</summary>
+              <p>Absolutely. All future updates, including new dashboards, apps and framework upgrades, are free for life.</p>
+            </details>
+            <details class="faq">
+              <summary>How do I get support?</summary>
+              <p>Each purchase includes 6 months of premium support via our help desk. Most tickets are answered within one business day.</p>
+            </details>
+          </div>
+        </div>
+
+        <p class="faq-more" data-reveal>Still have questions? <a href="mailto:support@example.com">Contact our support team →</a></p>
+      </div>
+    </section>
+
+    <!-- CTA =============================================================== -->
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="cta__box" data-reveal>
+          <div>
+            <span class="eyebrow">Get Started</span>
+            <h2 id="cta-title">Ship your admin panel this week</h2>
+            <p>Skip months of UI work. Start from production-ready dashboards, apps and components your team will love.</p>
+            <div class="cta__actions">
+              <a class="btn" href="https://themeforest.net/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-cart"/></svg> Buy Now for $29</a>
+              <a class="btn btn--ghost" href="#dashboards"><svg aria-hidden="true"><use href="#i-eye"/></svg> View Dashboards</a>
+            </div>
+          </div>
+          <div class="price-card">
+            <span class="price-card__label">Regular License</span>
+            <div class="price-card__amount"><strong>$29</strong><s>$59</s></div>
+            <ul class="check-list">
+              <li>All 6 framework versions</li>
+              <li>Figma design file</li>
+              <li>Free lifetime updates</li>
+              <li>6 months premium support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer ============================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="logo" href="#top" aria-label="Vantage home">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="url(#lg-logo)"/><text x="20" y="27.5" text-anchor="middle" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="20" font-weight="800" fill="#fff">V</text></svg>
+            Vantage
+          </a>
+          <p>A developer-first admin dashboard template and UI kit for SaaS, CRM, eCommerce and internal tools.</p>
+          <div class="socials">
+            <a href="#" aria-label="X (Twitter)"><svg aria-hidden="true"><use href="#s-x"/></svg></a>
+            <a href="#" aria-label="Dribbble"><svg aria-hidden="true"><use href="#s-dribbble"/></svg></a>
+            <a href="#" aria-label="GitHub"><svg aria-hidden="true"><use href="#s-github"/></svg></a>
+            <a href="#" aria-label="YouTube"><svg aria-hidden="true"><use href="#s-youtube"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#dashboards">Dashboards</a></li>
+            <li><a href="#frameworks">Frameworks</a></li>
+            <li><a href="#apps">Apps & Pages</a></li>
+            <li><a href="#changelog">Changelog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Getting Started</a></li>
+            <li><a href="#">Video Tutorials</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="mailto:support@example.com">Contact Us</a></li>
+            <li><a href="#">Licensing</a></li>
+            <li><a href="https://themeforest.net/" target="_blank" rel="noopener">Buy Vantage</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span id="year">2026</span> Vantage. All rights reserved.</span>
+        <span>Crafted with care by Your Studio</span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" type="button" aria-label="Back to top"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
+
+  <!-- Variation switcher: preview helper — remove this block before going live -->
+  <div class="switcher">
+    <div class="switcher__menu" id="switcher-menu">
+      <p>Showcase variations</p>
+      <a href="index.html"><i style="--c:#5b5bf7"></i><span>HTML Template<small>ThemeForest · Site template</small></span></a>
+      <a href="admin-dashboard.html" aria-current="page"><i style="--c:#0284c7"></i><span>Admin Dashboard<small>ThemeForest · Admin template</small></span></a>
+      <a href="wordpress-theme.html"><i style="--c:#e11d48"></i><span>WordPress Theme<small>ThemeForest · WordPress</small></span></a>
+      <a href="php-ai-saas.html"><i style="--c:#7c3aed"></i><span>AI SaaS Script<small>CodeCanyon · PHP / Laravel</small></span></a>
+      <a href="php-pos-inventory.html"><i style="--c:#059669"></i><span>POS & Inventory Script<small>CodeCanyon · PHP / Laravel</small></span></a>
+    </div>
+    <button class="switcher__toggle" type="button" aria-expanded="false" aria-controls="switcher-menu"><svg aria-hidden="true"><use href="#i-grid"/></svg> Variations</button>
+  </div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

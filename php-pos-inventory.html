@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stockly — POS, Inventory &amp; Invoicing System (PHP Script)</title>
+  <meta name="description" content="Stockly is a complete Laravel POS, inventory and invoicing system with multi-warehouse stock, barcode printing, roles and permissions and 40+ reports.">
+  <meta name="theme-color" content="#0a0c1d">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Stockly — POS, Inventory &amp; Invoicing System (PHP Script)">
+  <meta property="og:description" content="Stockly is a complete Laravel POS, inventory and invoicing system with multi-warehouse stock, barcode printing, roles and permissions and 40+ reports.">
+  <meta property="og:image" content="assets/img/pos/terminal.svg">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="theme-pos">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Icon sprite ========================================================= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/></symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></symbol>
+      <symbol id="i-dash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h12"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+      <symbol id="i-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+      <symbol id="f-responsive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="11" rx="2"/><rect x="17" y="8" width="5" height="12" rx="1.5"/><path d="M6 19h6"/></symbol>
+      <symbol id="f-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></symbol>
+      <symbol id="f-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+      <symbol id="f-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+      <symbol id="f-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+      <symbol id="f-type" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></symbol>
+      <symbol id="f-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol>
+      <symbol id="f-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></symbol>
+      <symbol id="f-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+      <symbol id="f-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8"/><path d="M21 3v5h-5"/></symbol>
+      <symbol id="f-support" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.9 4.9 4.3 4.3M14.8 14.8l4.3 4.3M14.8 9.2l4.3-4.3M4.9 19.1l4.3-4.3"/></symbol>
+      <symbol id="f-a11y" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.5"/><path d="M5 8l7 1.5L19 8M12 9.5V14m0 0-3 7m3-7 3 7"/></symbol>
+      <symbol id="f-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"/></symbol>
+      <symbol id="f-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1"/><circle cx="17.5" cy="10.5" r="1"/><circle cx="8.5" cy="7.5" r="1"/><circle cx="6.5" cy="12.5" r="1"/><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.3A5.7 5.7 0 0 0 22 9.8C22 5.5 17.5 2 12 2z"/></symbol>
+      <symbol id="f-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></symbol>
+      <symbol id="f-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+      <symbol id="f-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></symbol>
+      <symbol id="f-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="f-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></symbol>
+      <symbol id="f-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></symbol>
+      <symbol id="f-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8z"/><path d="m3 8 9 5 9-5M12 13v8"/></symbol>
+      <symbol id="f-barcode" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5v14M6 5v14M10 5v14M13 5v14M17 5v14M21 5v14"/></symbol>
+      <symbol id="f-printer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/></symbol>
+      <symbol id="f-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol>
+      <symbol id="f-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H5a2 2 0 0 1 0-4h13v4"/><path d="M3 5v14a2 2 0 0 0 2 2h15V7"/><circle cx="16" cy="14" r="1.5"/></symbol>
+      <symbol id="f-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.3-9.3M16 7l3 3M14 9l2 2"/></symbol>
+      <symbol id="f-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></symbol>
+      <symbol id="f-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/></symbol>
+      <symbol id="f-store" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v9h14v-9M10 21v-5h4v5"/></symbol>
+      <symbol id="f-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6"/><path d="M6 8h12v4a6 6 0 0 1-12 0V8z"/><path d="M12 18v4"/></symbol>
+      <symbol id="f-move" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><path d="m9 5 3-3 3 3M9 19l3 3 3-3M5 9l-3 3 3 3M19 9l3 3-3 3"/></symbol>
+      <symbol id="f-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 21h16"/></symbol>
+      <symbol id="f-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></symbol>
+      <symbol id="f-layout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></symbol>
+      <symbol id="f-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4h14v11H1z"/><path d="M15 8h4l3 3v4h-7"/><circle cx="5.5" cy="18" r="2"/><circle cx="18.5" cy="18" r="2"/></symbol>
+      <symbol id="f-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+      <symbol id="f-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+      <symbol id="f-receipt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h14v20l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h4"/></symbol>
+      <symbol id="f-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+      <symbol id="f-scan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V3h4M17 3h4v4M21 17v4h-4M7 21H3v-4"/><path d="M7 12h10"/></symbol>
+      <symbol id="f-swap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></symbol>
+      <symbol id="f-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></symbol>
+      <symbol id="s-x" viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.2-8.3L2 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></symbol>
+      <symbol id="s-dribbble" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.6 2.6C13 8 15.2 13.8 16 21.1M2.1 10.7c5.3.3 11.5-.9 16.9-4.9M5.3 19.4c3.3-4.6 8.7-6.6 16.5-5.2"/></symbol>
+      <symbol id="s-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.7 9.7 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></symbol>
+      <symbol id="s-youtube" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15.1V8.9l5.8 3.1-5.8 3.1z"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Header ============================================================== -->
+  <header class="header">
+    <div class="container">
+      <a class="logo" href="#top" aria-label="Stockly home">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg-logo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient></defs><rect width="40" height="40" rx="11" fill="url(#lg-logo)"/><text x="20" y="27.5" text-anchor="middle" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="20" font-weight="800" fill="#fff">S</text></svg>
+        Stockly <small>v5.2</small>
+      </a>
+
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#demo">Live Demo</a></li>
+          <li><a href="#modules">Modules</a></li>
+          <li><a href="#screens">Screens</a></li>
+          <li><a href="#permissions">Permissions</a></li>
+          <li><a href="#requirements">Requirements</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li class="nav__buy"><a class="btn" href="https://codecanyon.net/" target="_blank" rel="noopener">Buy Stockly — $49</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__cta">
+        <a class="btn btn--sm" href="https://codecanyon.net/" target="_blank" rel="noopener">
+          <svg aria-hidden="true"><use href="#i-cart"/></svg> Buy Now
+        </a>
+        <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero ============================================================== -->
+    <section class="hero" id="top">
+      <span class="hero__glow hero__glow--1"></span>
+      <span class="hero__glow hero__glow--2"></span>
+      <span class="hero__glow hero__glow--3"></span>
+
+      <div class="container">
+        <div class="hero__content">
+          <a class="hero__badge" href="#changelog"><b>NEW</b> Version 5.2 — Multi-store &amp; stock transfers</a>
+          <h1>Run your whole store from <span class="text-grad">one simple dashboard</span></h1>
+          <p class="hero__lead"><strong>Stockly</strong> is a complete POS, inventory and invoicing system built with Laravel. Sell faster with a touch-friendly POS, keep stock accurate across <strong>multiple warehouses</strong> and get the reports you need — on your own server.</p>
+          <div class="hero__actions">
+            <a class="btn" href="#demo">Try Live Demo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn--ghost" href="https://codecanyon.net/" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-cart"/></svg> Buy Now <span class="price">$49</span>
+            </a>
+          </div>
+          <div class="hero__trust">
+            <span>
+              <span class="stars" aria-hidden="true"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+              <span><strong>4.9/5</strong> average rating</span>
+            </span>
+            <i class="dot-sep" aria-hidden="true"></i>
+            <span><strong>2,600+</strong> businesses</span>
+            <i class="dot-sep" aria-hidden="true"></i>
+            <span>No monthly fees</span>
+          </div>
+        </div>
+
+        <div class="hero__stats" data-reveal>
+          <div><strong data-count="25" data-suffix="+">25+</strong><span>Modules</span></div>
+          <div><strong data-count="40" data-suffix="+">40+</strong><span>Reports</span></div>
+          <div><strong data-count="30" data-suffix="+">30+</strong><span>Languages</span></div>
+          <div><strong data-count="100" data-suffix="%">100%</strong><span>Source Code</span></div>
+        </div>
+
+        <div class="hero__showcase" aria-hidden="true">
+          <div class="browser browser--left">
+            <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url"></span></div>
+            <div class="shot"><img src="assets/img/pos/dashboard.svg" alt="" width="1200" height="1072"></div>
+          </div>
+          <div class="browser">
+            <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url"></span></div>
+            <div class="shot"><img src="assets/img/pos/terminal.svg" alt="" width="1200" height="908" fetchpriority="high"></div>
+          </div>
+          <div class="browser browser--right">
+            <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url"></span></div>
+            <div class="shot"><img src="assets/img/pos/products.svg" alt="" width="1200" height="788"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech stack ======================================================== -->
+    <section class="tech" aria-label="Built on a reliable, proven stack">
+      <div class="container">
+        <p class="tech__label">Built on a reliable, proven stack</p>
+        <ul class="tech__list">
+          <li><i style="--c:#ff2d20">L</i>Laravel 11</li>
+          <li><i style="--c:#777bb4">P</i>PHP 8.2+</li>
+          <li><i style="--c:#00758f">My</i>MySQL</li>
+          <li><i style="--c:#7952b3">B</i>Bootstrap 5</li>
+          <li><i style="--c:#059669">API</i>REST API</li>
+          <li><i style="--c:#0ea5e9">Ar</i>Multi-language &amp; RTL</li>
+          <li><i style="--c:#475569">ESC</i>ESC/POS Printing</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Live demo ========================================================= -->
+    <section class="section section--dark" id="demo">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Live Demo</span>
+          <h2>Log in as any role and try it yourself</h2>
+          <p>Each demo account shows exactly what that role can see and do.</p>
+        </div>
+
+        <div class="access-grid">
+          <div class="access" data-reveal>
+            <div class="access__head"><span class="access__icon"><svg aria-hidden="true"><use href="#f-shield"/></svg></span><div><h3>Admin</h3><span>Full access to every module</span></div></div>
+            <div class="cred"><div><small>Email</small><code>admin@example.com</code></div><button class="copy-btn" type="button" data-copy="admin@example.com" aria-label="Copy email"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+            <div class="cred"><div><small>Password</small><code>demo1234</code></div><button class="copy-btn" type="button" data-copy="demo1234" aria-label="Copy password"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+            <a class="btn" href="https://demo.example.com/stockly/login" target="_blank" rel="noopener">Log in as Admin <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="access" data-reveal style="--delay:0.08s">
+            <div class="access__head"><span class="access__icon"><svg aria-hidden="true"><use href="#f-users"/></svg></span><div><h3>Manager</h3><span>Products, stock, purchases &amp; reports</span></div></div>
+            <div class="cred"><div><small>Email</small><code>manager@example.com</code></div><button class="copy-btn" type="button" data-copy="manager@example.com" aria-label="Copy email"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+            <div class="cred"><div><small>Password</small><code>demo1234</code></div><button class="copy-btn" type="button" data-copy="demo1234" aria-label="Copy password"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+            <a class="btn" href="https://demo.example.com/stockly/login" target="_blank" rel="noopener">Log in as Manager <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="access" data-reveal style="--delay:0.16s">
+            <div class="access__head"><span class="access__icon"><svg aria-hidden="true"><use href="#f-store"/></svg></span><div><h3>Cashier</h3><span>POS terminal &amp; sales only</span></div></div>
+            <div class="cred"><div><small>Email</small><code>cashier@example.com</code></div><button class="copy-btn" type="button" data-copy="cashier@example.com" aria-label="Copy email"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+            <div class="cred"><div><small>Password</small><code>demo1234</code></div><button class="copy-btn" type="button" data-copy="demo1234" aria-label="Copy password"><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+            <a class="btn" href="https://demo.example.com/stockly/login" target="_blank" rel="noopener">Log in as Cashier <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+        <p class="access-note" data-reveal>Demo data resets every hour. Printing, backups and email are disabled in the demo.</p>
+      </div>
+    </section>
+
+    <!-- Modules =========================================================== -->
+    <section class="section" id="modules">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Modules</span>
+          <h2>Everything your store needs, in one system</h2>
+          <p>From the checkout counter to the back office — every module works together out of the box.</p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature" data-reveal><span class="feature__icon"><svg aria-hidden="true"><use href="#f-store"/></svg></span><h3>POS Terminal</h3><p>Touch-friendly checkout with barcode scanning and split payments.</p></div>
+          <div class="feature" data-reveal style="--delay:0.05s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-tag"/></svg></span><h3>Products &amp; Variants</h3><p>Sizes, colors, units, batches and expiry dates.</p></div>
+          <div class="feature" data-reveal style="--delay:0.10s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-truck"/></svg></span><h3>Purchases &amp; Suppliers</h3><p>Purchase orders, receiving and supplier balances.</p></div>
+          <div class="feature" data-reveal style="--delay:0.15s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-box"/></svg></span><h3>Multi-Warehouse Stock</h3><p>Track stock per store or warehouse in real time.</p></div>
+          <div class="feature" data-reveal><span class="feature__icon"><svg aria-hidden="true"><use href="#f-swap"/></svg></span><h3>Transfers &amp; Adjustments</h3><p>Move stock between locations with full history.</p></div>
+          <div class="feature" data-reveal style="--delay:0.05s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-receipt"/></svg></span><h3>Sales &amp; Returns</h3><p>Invoices, returns, refunds and partial payments.</p></div>
+          <div class="feature" data-reveal style="--delay:0.10s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-mail"/></svg></span><h3>Quotations</h3><p>Create quotes and convert them into sales in one click.</p></div>
+          <div class="feature" data-reveal style="--delay:0.15s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-users"/></svg></span><h3>Customers &amp; Loyalty</h3><p>Customer groups, credit limits and reward points.</p></div>
+          <div class="feature" data-reveal><span class="feature__icon"><svg aria-hidden="true"><use href="#f-wallet"/></svg></span><h3>Expenses</h3><p>Record expenses by category and see true profit.</p></div>
+          <div class="feature" data-reveal style="--delay:0.05s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-chart"/></svg></span><h3>40+ Reports</h3><p>Sales, profit, stock, tax and cash register reports.</p></div>
+          <div class="feature" data-reveal style="--delay:0.10s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-barcode"/></svg></span><h3>Barcode Labels</h3><p>Design and print product labels on any printer.</p></div>
+          <div class="feature" data-reveal style="--delay:0.15s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-lock"/></svg></span><h3>Users &amp; Roles</h3><p>Unlimited roles with fine-grained permissions.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screens =========================================================== -->
+    <section class="section section--soft" id="screens">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Screenshots</span>
+          <h2>Designed for speed at the counter</h2>
+          <p>Clean, fast screens that new staff learn in minutes.</p>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter by category" data-reveal>
+          <button class="filter-btn is-active" type="button" data-filter="all" aria-pressed="true">All <small>0</small></button>
+          <button class="filter-btn" type="button" data-filter="sales" aria-pressed="false">Sales <small>0</small></button>
+          <button class="filter-btn" type="button" data-filter="inventory" aria-pressed="false">Inventory <small>0</small></button>
+          <button class="filter-btn" type="button" data-filter="admin" aria-pressed="false">Admin &amp; Reports <small>0</small></button>
+        </div>
+
+        <div class="demo-grid">
+          <article class="demo-card" data-category="sales" data-reveal>
+            <a class="demo-card__link" href="assets/img/pos/terminal.svg" target="_blank" rel="noopener" aria-label="View Screen: POS Terminal">
+              <span class="badge badge--hot">Popular</span>
+              <div class="shot"><img src="assets/img/pos/terminal.svg" alt="POS Terminal screen" width="1200" height="908" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">View Screen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="assets/img/pos/terminal.svg" target="_blank" rel="noopener">POS Terminal</a></h3><span>Sales</span></div>
+          </article>
+          <article class="demo-card" data-category="admin sales" data-reveal style="--delay:0.08s">
+            <a class="demo-card__link" href="assets/img/pos/dashboard.svg" target="_blank" rel="noopener" aria-label="View Screen: Dashboard">
+              <div class="shot"><img src="assets/img/pos/dashboard.svg" alt="Dashboard screen" width="1200" height="1072" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">View Screen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="assets/img/pos/dashboard.svg" target="_blank" rel="noopener">Dashboard</a></h3><span>Overview</span></div>
+          </article>
+          <article class="demo-card" data-category="inventory" data-reveal style="--delay:0.16s">
+            <a class="demo-card__link" href="assets/img/pos/products.svg" target="_blank" rel="noopener" aria-label="View Screen: Product List">
+              <div class="shot"><img src="assets/img/pos/products.svg" alt="Product List screen" width="1200" height="788" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">View Screen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="assets/img/pos/products.svg" target="_blank" rel="noopener">Product List</a></h3><span>Inventory</span></div>
+          </article>
+          <article class="demo-card" data-category="inventory" data-reveal>
+            <a class="demo-card__link" href="assets/img/pos/add-product.svg" target="_blank" rel="noopener" aria-label="View Screen: Add Product">
+              <div class="shot"><img src="assets/img/pos/add-product.svg" alt="Add Product screen" width="1200" height="932" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">View Screen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="assets/img/pos/add-product.svg" target="_blank" rel="noopener">Add Product</a></h3><span>Inventory</span></div>
+          </article>
+          <article class="demo-card" data-category="inventory" data-reveal style="--delay:0.08s">
+            <a class="demo-card__link" href="assets/img/pos/inventory.svg" target="_blank" rel="noopener" aria-label="View Screen: Multi-Warehouse Stock">
+              <span class="badge">New</span>
+              <div class="shot"><img src="assets/img/pos/inventory.svg" alt="Multi-Warehouse Stock screen" width="1200" height="820" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">View Screen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="assets/img/pos/inventory.svg" target="_blank" rel="noopener">Multi-Warehouse Stock</a></h3><span>Inventory</span></div>
+          </article>
+          <article class="demo-card" data-category="inventory" data-reveal style="--delay:0.16s">
+            <a class="demo-card__link" href="assets/img/pos/purchase.svg" target="_blank" rel="noopener" aria-label="View Screen: Purchase Invoice">
+              <div class="shot"><img src="assets/img/pos/purchase.svg" alt="Purchase Invoice screen" width="1200" height="932" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">View Screen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="assets/img/pos/purchase.svg" target="_blank" rel="noopener">Purchase Invoice</a></h3><span>Purchasing</span></div>
+          </article>
+          <article class="demo-card" data-category="inventory" data-reveal>
+            <a class="demo-card__link" href="assets/img/pos/barcodes.svg" target="_blank" rel="noopener" aria-label="View Screen: Barcode Printing">
+              <div class="shot"><img src="assets/img/pos/barcodes.svg" alt="Barcode Printing screen" width="1200" height="686" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">View Screen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="assets/img/pos/barcodes.svg" target="_blank" rel="noopener">Barcode Printing</a></h3><span>Inventory</span></div>
+          </article>
+          <article class="demo-card" data-category="sales" data-reveal style="--delay:0.08s">
+            <a class="demo-card__link" href="assets/img/pos/customers.svg" target="_blank" rel="noopener" aria-label="View Screen: Customers">
+              <div class="shot"><img src="assets/img/pos/customers.svg" alt="Customers screen" width="1200" height="788" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">View Screen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="assets/img/pos/customers.svg" target="_blank" rel="noopener">Customers</a></h3><span>Sales</span></div>
+          </article>
+          <article class="demo-card" data-category="admin sales" data-reveal style="--delay:0.16s">
+            <a class="demo-card__link" href="assets/img/pos/reports.svg" target="_blank" rel="noopener" aria-label="View Screen: Sales Reports">
+              <div class="shot"><img src="assets/img/pos/reports.svg" alt="Sales Reports screen" width="1200" height="1036" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">View Screen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="assets/img/pos/reports.svg" target="_blank" rel="noopener">Sales Reports</a></h3><span>Reports</span></div>
+          </article>
+          <article class="demo-card" data-category="admin" data-reveal>
+            <a class="demo-card__link" href="assets/img/pos/roles.svg" target="_blank" rel="noopener" aria-label="View Screen: Roles &amp; Permissions">
+              <div class="shot"><img src="assets/img/pos/roles.svg" alt="Roles &amp; Permissions screen" width="1200" height="812" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">View Screen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="assets/img/pos/roles.svg" target="_blank" rel="noopener">Roles &amp; Permissions</a></h3><span>Admin</span></div>
+          </article>
+          <article class="demo-card" data-category="admin" data-reveal style="--delay:0.08s">
+            <a class="demo-card__link" href="assets/img/pos/settings.svg" target="_blank" rel="noopener" aria-label="View Screen: Business Settings">
+              <div class="shot"><img src="assets/img/pos/settings.svg" alt="Business Settings screen" width="1200" height="932" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">View Screen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="assets/img/pos/settings.svg" target="_blank" rel="noopener">Business Settings</a></h3><span>Admin</span></div>
+          </article>
+          <article class="demo-card" data-category="admin" data-reveal style="--delay:0.16s">
+            <a class="demo-card__link" href="assets/img/pos/login.svg" target="_blank" rel="noopener" aria-label="View Screen: Login">
+              <div class="shot"><img src="assets/img/pos/login.svg" alt="Login screen" width="800" height="1100" loading="lazy"></div>
+              <span class="demo-card__overlay"><span class="btn btn--light btn--sm">View Screen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+            </a>
+            <div class="demo-card__meta"><h3><a href="assets/img/pos/login.svg" target="_blank" rel="noopener">Login</a></h3><span>Admin</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hardware ========================================================== -->
+    <section class="section" id="hardware">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Hardware</span>
+          <h2>Works with the hardware you already have</h2>
+          <p>No proprietary devices or lock-in. Plug in standard retail hardware and start selling.</p>
+        </div>
+
+        <div class="feature-grid hardware">
+          <div class="feature" data-reveal><span class="feature__icon"><svg aria-hidden="true"><use href="#f-scan"/></svg></span><h3>Barcode Scanners</h3><p>Any USB or Bluetooth scanner that works as a keyboard.</p></div>
+          <div class="feature" data-reveal style="--delay:0.05s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-printer"/></svg></span><h3>Receipt Printers</h3><p>58mm and 80mm thermal printers via ESC/POS or browser printing.</p></div>
+          <div class="feature" data-reveal style="--delay:0.10s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-wallet"/></svg></span><h3>Cash Drawers</h3><p>Opens automatically through your receipt printer.</p></div>
+          <div class="feature" data-reveal style="--delay:0.15s"><span class="feature__icon"><svg aria-hidden="true"><use href="#f-tag"/></svg></span><h3>Label Printers</h3><p>Print barcode labels on sticker rolls or A4 sheets.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Permissions ======================================================= -->
+    <section class="section section--soft" id="permissions">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Roles &amp; Permissions</span>
+          <h2>Everyone sees exactly what they need</h2>
+          <p>Four roles out of the box — create as many custom roles as you like with granular permissions.</p>
+        </div>
+
+        <div class="matrix-wrap" data-reveal>
+          <table class="matrix">
+            <thead><tr><th scope="col">Module</th><th scope="col">Admin</th><th scope="col">Manager</th><th scope="col">Cashier</th><th scope="col">Accountant</th></tr></thead>
+            <tbody>
+              <tr><td>Dashboard</td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td></tr>
+              <tr><td>POS &amp; Sales</td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td></tr>
+              <tr><td>Products</td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td></tr>
+              <tr><td>Purchases</td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td></tr>
+              <tr><td>Inventory &amp; Transfers</td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td></tr>
+              <tr><td>Customers</td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td></tr>
+              <tr><td>Expenses</td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td></tr>
+              <tr><td>Reports</td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td></tr>
+              <tr><td>Users &amp; Roles</td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td></tr>
+              <tr><td>Settings</td><td><span class="y" aria-label="Allowed"><svg aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td><td><span class="n" aria-label="Not allowed"><svg aria-hidden="true"><use href="#i-dash"/></svg></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="license-note" data-reveal>Permissions can be set per module and per action (view, create, edit, delete).</p>
+      </div>
+    </section>
+
+    <!-- Requirements ====================================================== -->
+    <section class="section" id="requirements">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Requirements</span>
+          <h2>Install on your own server — or locally</h2>
+          <p>Run it on shared hosting, a VPS or a local machine on your store network.</p>
+        </div>
+
+        <div class="req">
+          <div class="req__card" data-reveal>
+            <h3>Server requirements</h3>
+            <ul class="req-list">
+              <li><span>PHP</span><b>8.2 or higher</b></li>
+              <li><span>Database</span><b>MySQL 5.7+ / MariaDB 10.3+</b></li>
+              <li><span>PHP extensions</span><b>BCMath, cURL, GD, Intl, Mbstring, PDO, Zip</b></li>
+              <li><span>Web server</span><b>Apache or Nginx</b></li>
+              <li><span>Local install</span><b>XAMPP / Laragon supported</b></li>
+              <li><span>Printer (optional)</span><b>ESC/POS compatible</b></li>
+            </ul>
+          </div>
+          <div class="req__card" data-reveal style="--delay:.1s">
+            <h3>Up and running in minutes</h3>
+            <ol class="install-list">
+              <li><b>Upload the files</b><span>Upload to your hosting or copy into your local server folder.</span></li>
+              <li><b>Run the installer</b><span>Open the site in your browser — the installer checks requirements and creates the database tables.</span></li>
+              <li><b>Set up your business</b><span>Add your store details, tax rates, currency and staff accounts, then start selling.</span></li>
+            </ol>
+            <div class="terminal"><span class="c"># Optional: automatic daily database backups</span>&#10;<span class="p">*</span> * * * * php /path/to/stockly/artisan schedule:run &gt;&gt; /dev/null 2&gt;&amp;1</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- License =========================================================== -->
+    <section class="section section--soft" id="license">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Licensing</span>
+          <h2>Choose the right license</h2>
+          <p>Running it for your own business? The Regular License is all you need.</p>
+        </div>
+
+        <div class="license-grid">
+          <div class="license" data-reveal>
+            <h3>Regular License</h3>
+            <p>For one business — yours or a single client's. Ideal for most stores.</p>
+            <div class="license__price"><strong>$49</strong><span>one-time payment</span></div>
+            <ul>
+              <li>Full unencrypted source code</li>
+              <li>All modules &amp; future updates</li>
+              <li>6 months premium support</li>
+              <li>Unlimited users &amp; warehouses</li>
+              <li class="no">Sell access to other businesses</li>
+              <li class="no">Run as a paid SaaS</li>
+            </ul>
+            <a class="btn btn--outline" href="https://codecanyon.net/" target="_blank" rel="noopener">Buy Regular License <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="license license--featured" data-reveal style="--delay:.1s">
+            <span class="license__ribbon">For SaaS &amp; resellers</span>
+            <h3>Extended License</h3>
+            <p>Required if you charge other businesses to use it — for example as a SaaS POS.</p>
+            <div class="license__price"><strong>$249</strong><span>one-time payment</span></div>
+            <ul>
+              <li>Everything in the Regular License</li>
+              <li>Charge end users for access</li>
+              <li>Run as a commercial SaaS</li>
+              <li>White-label branding</li>
+              <li>Priority support queue</li>
+              <li>Free installation service</li>
+            </ul>
+            <a class="btn" href="https://codecanyon.net/" target="_blank" rel="noopener">Buy Extended License <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+        <p class="license-note" data-reveal>Licenses are issued by the marketplace. Please read the official license terms to choose the one that fits your project.</p>
+      </div>
+    </section>
+
+    <!-- Reviews =========================================================== -->
+    <section class="section" id="reviews">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Customer Reviews</span>
+          <h2>Trusted by stores of every size</h2>
+          <p>Here's what our customers have to say about Stockly.</p>
+        </div>
+
+        <div class="rating-summary" data-reveal>
+          <strong>4.9</strong>
+          <div>
+            <span class="stars" aria-label="Rated 4.9 out of 5"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+            <small>Based on 460+ ratings</small>
+          </div>
+        </div>
+
+        <div class="review-grid">
+          <figure class="review" data-reveal>
+            <div class="review__top">
+              <span class="stars" aria-label="5 out of 5"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+              <span class="review__tag">Ease of Use</span>
+            </div>
+            <blockquote>“Our cashiers learned the POS in ten minutes. Barcode scanning and receipt printing worked straight away with our existing hardware.”</blockquote>
+            <figcaption class="review__author"><span class="avatar" style="--c:#059669">AH</span><div><b>ahmed_retail</b><span>Supermarket owner</span></div></figcaption>
+          </figure>
+          <figure class="review" data-reveal style="--delay:0.08s">
+            <div class="review__top">
+              <span class="stars" aria-label="5 out of 5"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+              <span class="review__tag">Feature Availability</span>
+            </div>
+            <blockquote>“Multi-warehouse stock and transfers were exactly what we needed. We replaced an expensive monthly subscription with Stockly.”</blockquote>
+            <figcaption class="review__author"><span class="avatar" style="--c:#0ea5e9">NG</span><div><b>nina.g</b><span>Wholesale distributor</span></div></figcaption>
+          </figure>
+          <figure class="review" data-reveal style="--delay:0.16s">
+            <div class="review__top">
+              <span class="stars" aria-label="5 out of 5"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+              <span class="review__tag">Customer Support</span>
+            </div>
+            <blockquote>“Support customized a receipt layout for us and answered every question quickly. Highly recommended.”</blockquote>
+            <figcaption class="review__author"><span class="avatar" style="--c:#f59e0b">PK</span><div><b>pkumar</b><span>Restaurant manager</span></div></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Changelog ========================================================= -->
+    <section class="section section--soft" id="changelog">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Changelog</span>
+          <h2>Improving every month</h2>
+          <p>Updates are free for life — download them from your marketplace account.</p>
+        </div>
+
+        <div class="changelog">
+          <div class="release" data-reveal>
+            <div class="release__head"><h3>Version 5.2</h3><time datetime="2026-10-05">October 5, 2026</time><span class="release__latest">Latest</span></div>
+            <ul>
+              <li><span class="tag tag--new">New</span>Multi-store support with stock transfers</li>
+              <li><span class="tag tag--new">New</span>Customer loyalty points</li>
+              <li><span class="tag tag--improved">Improved</span>POS loads 2x faster with large catalogs</li>
+              <li><span class="tag tag--fixed">Fixed</span>Tax rounding on split payments</li>
+            </ul>
+          </div>
+          <div class="release" data-reveal>
+            <div class="release__head"><h3>Version 5.1</h3><time datetime="2026-07-21">July 21, 2026</time></div>
+            <ul>
+              <li><span class="tag tag--new">New</span>Batch &amp; expiry tracking</li>
+              <li><span class="tag tag--improved">Improved</span>Redesigned barcode label editor</li>
+              <li><span class="tag tag--fixed">Fixed</span>Receipt width on 58mm printers</li>
+            </ul>
+          </div>
+          <details>
+            <summary class="btn btn--outline btn--sm">Show older releases</summary>
+  <div class="release">
+    <div class="release__head"><h3>Version 5.0</h3><time datetime="2026-03-30">March 30, 2026</time></div>
+    <ul>
+      <li><span class="tag tag--new">New</span>Completely redesigned interface</li>
+      <li><span class="tag tag--new">New</span>REST API for mobile apps &amp; integrations</li>
+    </ul>
+  </div>
+  <div class="release">
+    <div class="release__head"><h3>Version 4.0</h3><time datetime="2025-11-12">November 12, 2025</time></div>
+    <ul>
+      <li><span class="tag tag--new">New</span>Quotations and purchase returns</li>
+    </ul>
+  </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ =============================================================== -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">FAQ</span>
+          <h2>Frequently asked questions</h2>
+          <p>Can't find what you're looking for? Our support team is happy to help.</p>
+        </div>
+
+        <div class="faq-grid">
+          <div>
+            <details class="faq" open>
+              <summary>Can I manage multiple stores?</summary>
+              <p>Yes. Add unlimited stores and warehouses, track stock separately for each and transfer stock between them.</p>
+            </details>
+            <details class="faq">
+              <summary>Will it work with my scanner and printer?</summary>
+              <p>Most likely. Any keyboard-mode barcode scanner works, and thermal printers are supported via ESC/POS or standard browser printing.</p>
+            </details>
+            <details class="faq">
+              <summary>Can I run it without internet?</summary>
+              <p>Yes — install it on a local computer (for example with XAMPP or Laragon) and use it over your store network.</p>
+            </details>
+          </div>
+          <div>
+            <details class="faq">
+              <summary>Is the source code included?</summary>
+              <p>Yes, you get the full unencrypted Laravel source code to customize as you need.</p>
+            </details>
+            <details class="faq">
+              <summary>Does it support my currency and taxes?</summary>
+              <p>Yes. Configure any currency, multiple tax rates, inclusive or exclusive tax, and translate the interface into your language.</p>
+            </details>
+            <details class="faq">
+              <summary>Do you help with installation?</summary>
+              <p>Installation is free with the Extended License and available as an affordable service for Regular License buyers.</p>
+            </details>
+          </div>
+        </div>
+
+        <p class="faq-more" data-reveal>Still have questions? <a href="mailto:support@example.com">Contact our support team →</a></p>
+      </div>
+    </section>
+
+    <!-- CTA =============================================================== -->
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="cta__box" data-reveal>
+          <div>
+            <span class="eyebrow">Get Started</span>
+            <h2 id="cta-title">Take control of your sales &amp; stock</h2>
+            <p>One-time payment, no monthly fees. Install it on your own server and run your business your way.</p>
+            <div class="cta__actions">
+              <a class="btn" href="https://codecanyon.net/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-cart"/></svg> Buy Now for $49</a>
+              <a class="btn btn--ghost" href="#demo"><svg aria-hidden="true"><use href="#i-eye"/></svg> Try Live Demo</a>
+            </div>
+          </div>
+          <div class="price-card">
+            <span class="price-card__label">Regular License</span>
+            <div class="price-card__amount"><strong>$49</strong><s>$79</s></div>
+            <ul class="check-list">
+              <li>Full unencrypted source code</li>
+              <li>All modules included</li>
+              <li>Free lifetime updates</li>
+              <li>6 months premium support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer ============================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="logo" href="#top" aria-label="Stockly home">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="url(#lg-logo)"/><text x="20" y="27.5" text-anchor="middle" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="20" font-weight="800" fill="#fff">S</text></svg>
+            Stockly
+          </a>
+          <p>A complete POS, inventory and invoicing system for retail stores, restaurants and wholesalers.</p>
+          <div class="socials">
+            <a href="#" aria-label="X (Twitter)"><svg aria-hidden="true"><use href="#s-x"/></svg></a>
+            <a href="#" aria-label="Dribbble"><svg aria-hidden="true"><use href="#s-dribbble"/></svg></a>
+            <a href="#" aria-label="GitHub"><svg aria-hidden="true"><use href="#s-github"/></svg></a>
+            <a href="#" aria-label="YouTube"><svg aria-hidden="true"><use href="#s-youtube"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#demo">Live Demo</a></li>
+            <li><a href="#modules">Modules</a></li>
+            <li><a href="#screens">Screens</a></li>
+            <li><a href="#changelog">Changelog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Getting Started</a></li>
+            <li><a href="#">Video Tutorials</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="mailto:support@example.com">Contact Us</a></li>
+            <li><a href="#">Licensing</a></li>
+            <li><a href="https://codecanyon.net/" target="_blank" rel="noopener">Buy Stockly</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span id="year">2026</span> Stockly. All rights reserved.</span>
+        <span>Crafted with care by Your Studio</span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" type="button" aria-label="Back to top"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
+
+  <!-- Variation switcher: preview helper — remove this block before going live -->
+  <div class="switcher">
+    <div class="switcher__menu" id="switcher-menu">
+      <p>Showcase variations</p>
+      <a href="index.html"><i style="--c:#5b5bf7"></i><span>HTML Template<small>ThemeForest · Site template</small></span></a>
+      <a href="admin-dashboard.html"><i style="--c:#0284c7"></i><span>Admin Dashboard<small>ThemeForest · Admin template</small></span></a>
+      <a href="wordpress-theme.html"><i style="--c:#e11d48"></i><span>WordPress Theme<small>ThemeForest · WordPress</small></span></a>
+      <a href="php-ai-saas.html"><i style="--c:#7c3aed"></i><span>AI SaaS Script<small>CodeCanyon · PHP / Laravel</small></span></a>
+      <a href="php-pos-inventory.html" aria-current="page"><i style="--c:#059669"></i><span>POS & Inventory Script<small>CodeCanyon · PHP / Laravel</small></span></a>
+    </div>
+    <button class="switcher__toggle" type="button" aria-expanded="false" aria-controls="switcher-menu"><svg aria-hidden="true"><use href="#i-grid"/></svg> Variations</button>
+  </div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

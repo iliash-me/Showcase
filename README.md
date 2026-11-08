@@ -1,80 +1,94 @@
-# Nexora — ThemeForest Template Showcase
+# Marketplace Item Showcase Pages
 
-A landing page for presenting a multipurpose HTML template on ThemeForest (or any marketplace): the item's "live preview" home that shows buyers every demo, inner page and feature at a glance.
+Landing pages for presenting items on ThemeForest and CodeCanyon (or any marketplace): the "live preview" page that shows buyers every demo, screen and feature at a glance. Five variations share one stylesheet and one script:
 
-- **No build step.** Plain HTML, CSS and vanilla JS. Open `index.html` or deploy the folder anywhere.
+| File | For | Product (sample) | Theme |
+| --- | --- | --- | --- |
+| `index.html` | ThemeForest: HTML site template | Nexora | Indigo |
+| `admin-dashboard.html` | ThemeForest: admin dashboard template | Vantage | Sky blue (`.theme-admin`) |
+| `wordpress-theme.html` | ThemeForest: WordPress theme | Aurelia | Rose (`.theme-wp`) |
+| `php-ai-saas.html` | CodeCanyon: PHP/Laravel AI content SaaS script | Quillo | Violet (`.theme-ai`) |
+| `php-pos-inventory.html` | CodeCanyon: PHP/Laravel POS & inventory script | Stockly | Emerald (`.theme-pos`) |
+
+- **No build step.** Plain HTML, CSS and vanilla JS. Open any `.html` file or deploy the folder anywhere.
 - **No dependencies.** The only external request is Google Fonts.
 - **Responsive and accessible.** Mobile menu, keyboard focus styles, `prefers-reduced-motion` support, no horizontal scroll down to 320px.
 
-## Sections
+Pick the page that matches your product, delete the others, and remove the **variation switcher** block (marked with a comment near the end of each page) before going live.
 
-| Section | Anchor | Notes |
-| --- | --- | --- |
-| Hero | `#top` | Headline, CTAs, rating, animated stats, 3-browser showcase |
-| Tech strip | — | "Built with" chips |
-| Demos | `#demos` | Filterable grid (counts are calculated automatically), scroll-on-hover previews, New/Popular/Dark badges |
-| Spotlight | `#highlights` | Dark mode, responsive devices, UI blocks |
-| Inner pages | `#pages` | 16 page previews and an element chip list |
-| Features | `#features` | 16 feature cards with inline SVG icons |
-| Performance | `#performance` | Animated Lighthouse score rings |
-| Reviews | `#reviews` | Rating summary and review cards |
-| Changelog | `#changelog` | Release timeline with collapsible older releases |
-| FAQ | `#faq` | Native `<details>` accordion |
-| CTA and footer | — | Pricing card, purchase links |
+## What's on each page
+
+All pages share: sticky header, hero with stats and a 3-browser showcase, tech/plugin strip, features grid, reviews, changelog, FAQ, pricing CTA and footer.
+
+| Page | Product-specific sections |
+| --- | --- |
+| HTML template | Filterable demo grid, dark-mode / responsive / UI-blocks spotlights, inner pages, Lighthouse scores |
+| Admin dashboard | Framework versions (HTML, React, Next.js, Vue, Angular, Laravel), filterable dashboards, **live customizer** (switch light/dark/semi-dark/horizontal and tint the brand color), apps & pages, developer-experience terminal |
+| WordPress theme | Filterable starter sites, 3-step one-click demo import with importer screenshot, Elementor builder and WooCommerce spotlights, PageSpeed scores |
+| AI SaaS script | **Live demo logins** with copy buttons (landing, user, admin), screens filtered by Frontend / User / Admin, AI-tools and monetization spotlights, AI provider and payment gateway integrations, server requirements and installation, **Regular vs Extended license** comparison |
+| POS script | Role-based demo logins (admin, manager, cashier), modules grid, filterable screens, supported hardware, **roles & permissions matrix**, requirements, license comparison |
 
 ## Project structure
 
 ```
-index.html
+index.html  admin-dashboard.html  wordpress-theme.html  php-ai-saas.html  php-pos-inventory.html
 assets/
-  css/style.css          # all styles; design tokens at the top (:root)
-  js/main.js             # nav, filter, reveal, counters, score rings
+  css/style.css          # all styles; design tokens in :root, per-page themes in section 16
+  js/main.js             # nav, filters, reveal, counters, score rings, copy buttons, customizer, switcher
   img/
     favicon.svg
-    demos/*.svg          # homepage previews (placeholders)
-    pages/*.svg          # inner-page previews (placeholders)
+    demos/  pages/       # HTML template previews (placeholders)
+    admin/               # admin dashboards, layout variants and app screens
+    wp/                  # WordPress starter sites, importer and page builder
+    ai/  pos/            # PHP script screens
 tools/
-  generate_thumbnails.py # regenerates the placeholder previews
+  generate_thumbnails.py # regenerates every placeholder preview
+  app_screens.py         # app/admin screen drawing (used by the script above)
 ```
 
 ## Customizing
 
 ### 1. Name, price and links
-Search `index.html` for these and replace them:
+Search the page you're using and replace:
 
-- `Nexora`: your template name
-- `$19` / `$49`: your price
-- `https://themeforest.net/`: your item URL, e.g. `https://themeforest.net/item/your-item/12345678`
-- `demo/index-*.html` and `demo/*.html`: URLs of your live demos and inner pages
+- The product name (`Nexora`, `Vantage`, `Aurelia`, `Quillo` or `Stockly`) and the logo letter in the header and footer SVG
+- Prices (`$19`, `$29`, `$59`, `$69`, `$49` and the license prices)
+- `https://themeforest.net/` / `https://codecanyon.net/`: your item URL
+- `demo/...` links and `https://demo.example.com/...`: your live demo URLs
+- Demo credentials (`admin@example.com` / `demo1234`, etc.) in the live demo cards
 - `support@example.com`, social links (`href="#"`), "Your Studio"
 
-The stats, ratings, reviews, changelog entries and Lighthouse scores are **sample content**. Replace them with your item's real numbers before publishing.
+The stats, ratings, reviews, changelog entries, performance scores and license terms are **sample content**. Replace them with your item's real details before publishing, and check license wording against the marketplace's official terms.
 
 ### 2. Brand colors and font
-Edit the tokens at the top of `assets/css/style.css`:
+Each page sets its colors with a class on `<body>` (`theme-admin`, `theme-wp`, `theme-ai`, `theme-pos`; no class means the default indigo). Edit that theme in section 16 of `assets/css/style.css`, or add your own:
 
 ```css
-:root {
-  --primary: #5b5bf7;
-  --grad: linear-gradient(120deg, #7c6bff 0%, #5b5bf7 45%, #22c3ee 100%);
-  --font: "Plus Jakarta Sans", ...;
+.theme-mine {
+  --primary: #2563eb; --primary-600: #1d4ed8; --primary-50: #eaf1ff;
+  --primary-rgb: 37 99 235;          /* same color as space-separated RGB, used for shadows */
+  --primary-light: #93c5fd;          /* accent text on dark sections */
+  --grad: linear-gradient(120deg, #60a5fa, #2563eb 45%, #7c3aed);
+  --glow-1: #2563eb; --glow-2: #7c3aed; --glow-3: #3b82f6;  /* hero background glows */
 }
 ```
 
 ### 3. Real screenshots
-The previews in `assets/img/demos` and `assets/img/pages` are generated placeholders. Replace them with **full-page screenshots** of your template:
+Every image in `assets/img/` is a generated placeholder. Replace them with real screenshots:
 
-- Width ~800px (or 1600px for retina), any height. Taller images scroll on hover.
-- Save as `.webp`/`.jpg`, update each `src`, and set the `width`/`height` attributes to the real size to avoid layout shift.
+- **Websites and starter sites:** full-page screenshots ~800px wide (or 1600px for retina), any height. Taller images scroll on hover.
+- **Admin and app screens:** ~1200px wide desktop screenshots (or 2400px for retina).
+- Save as `.webp`/`.jpg`, update each `src`, and set `width`/`height` to the real size to avoid layout shift.
+- **Admin customizer:** the buttons swap between the `data-src` images, so provide a screenshot per layout (light, dark, semi-dark, horizontal). The color swatches tint the preview with `hue-rotate`; adjust each `data-hue` to suit your palette.
 
-Want different placeholder styles or colors? Edit `DEMOS` / `PAGES` in `tools/generate_thumbnails.py` and run:
+To change the placeholders instead, edit the definitions in `tools/generate_thumbnails.py` / `tools/app_screens.py` and run:
 
 ```bash
 python3 tools/generate_thumbnails.py
 ```
 
-### 4. Adding a demo
-Copy a `<article class="demo-card">` block in `index.html` and set `data-category` to one or more filter keys (`business agency saas landing portfolio shop`). The filter counts update automatically. To add a new filter, add a `<button class="filter-btn" data-filter="key">`.
+### 4. Adding cards
+Copy an `<article class="demo-card">` block and set `data-category` to one or more filter keys used by that page's filter buttons. Filter counts update automatically. To add a filter, add a `<button class="filter-btn" data-filter="key">`.
 
 ## Browser support
-Latest Chrome, Edge, Firefox and Safari. The score-ring fill animation uses `@property`; browsers without it still show the final value.
+Latest Chrome, Edge, Firefox and Safari. The score-ring fill animation uses `@property` and theme glows use `color-mix()`; older browsers still show the final values with simpler colors.

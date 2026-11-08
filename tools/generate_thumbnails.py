@@ -8,7 +8,7 @@ replace each generated file with a real full-page screenshot (PNG/JPG/WebP,
 ~800px wide) and update the matching `src` in index.html.
 
 Usage:  python3 tools/generate_thumbnails.py
-Output: assets/img/demos/*.svg, assets/img/pages/*.svg
+Output: assets/img/{demos,pages,admin,wp,ai,pos}/*.svg
 """
 from __future__ import annotations
 
@@ -51,6 +51,7 @@ def palette(primary: str, dark: bool) -> dict:
         p=primary, p2=mix(primary, "#ffffff" if dark else "#000000", 0.25),
         soft=mix(primary, bg, 0.86), bg=bg, surface=surface, line=line,
         heading=heading, muted=muted, footer=footer, dark=dark,
+        subtle="#8a93b5" if dark else "#6b7280",
         card="#1a2140" if dark else "#ffffff", border="#252d4b" if dark else "#e8ebf2",
     )
 
@@ -67,6 +68,8 @@ class Canvas:
         self.y = 0
         self._id = 0
         self.rnd = random.Random(seed)
+        self.width = W
+        self.bgfill = self.c["bg"]
 
     # primitives ------------------------------------------------------------ #
     def uid(self, prefix="g"):
@@ -735,9 +738,10 @@ class Canvas:
     # output ----------------------------------------------------------------- #
     def svg(self) -> str:
         h = int(self.y)
+        w = self.width
         return (
-            f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}">'
-            f'<defs>{"".join(self.defs)}</defs><rect width="{W}" height="{h}" fill="{self.c["bg"]}"/>'
+            f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">'
+            f'<defs>{"".join(self.defs)}</defs><rect width="{w}" height="{h}" fill="{self.bgfill}"/>'
             f'{"".join(self.parts)}</svg>\n'
         )
 
@@ -824,7 +828,12 @@ def main():
         with open(os.path.join(page_dir, f"{fname}.svg"), "w") as fh:
             fh.write(cv.svg())
 
-    print(f"Generated {len(DEMOS)} demo and {len(PAGES)} page thumbnails.")
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import app_screens  # noqa: E402  (admin, WordPress, SaaS and POS screens)
+    extra = app_screens.generate(ROOT)
+
+    print(f"Generated {len(DEMOS)} demo, {len(PAGES)} page and {extra} app/theme thumbnails.")
 
 
 if __name__ == "__main__":
